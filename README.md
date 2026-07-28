@@ -251,24 +251,32 @@ Recurso Método Endpoint Descrição
 ### Cadastro de Cursos
 
 ![Cadastro de Cursos](docs/imagens/cursos.png)
+![Cadastro de Cursos](docs/imagens/cursos1.png)
+![Cadastro de Cursos](docs/imagens/cursos2.png)
+![Cadastro de Cursos](docs/imagens/cursos3.png)
 
 ---
 
 ### Cadastro de Turmas
 
 ![Cadastro de Turmas](docs/imagens/turmas.png)
+![Cadastro de Turmas](docs/imagens/turmas1.png)
 
 ---
 
 ### Matrículas
 
 ![Matrículas](docs/imagens/matriculas.png)
+![Matrículas](docs/imagens/matriculas2.png)
 
 ---
 
 ### Documentação da API (Swagger)
 
 ![Swagger](docs/imagens/swagger-home.png)
+![Swagger](docs/imagens/swagger-home1.png)
+![Swagger](docs/imagens/swagger-home2.png)
+![Swagger](docs/imagens/swagger-home3.png)
 
 
 
