@@ -158,9 +158,9 @@ postgres
 Senha:
 1234
 
-🚀 Como executar o projeto localmente
-Pré-requisitos
+## 🚀 Como executar o projeto localmente
 
+Pré-requisitos
 Instalar:
 
 Java 17
