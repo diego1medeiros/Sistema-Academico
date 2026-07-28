@@ -225,7 +225,7 @@ Turmas	GET	/turmas	Lista turmas
 Matrículas	POST	/matriculas	Realiza matrícula
 
 
-📝 Teste Manual do Fluxo de Matrícula
+## 📝 Teste Manual do Fluxo de Matrícula
 
 Fluxo esperado:
 
@@ -240,22 +240,24 @@ Resultado esperado:
 Matrícula criada com sucesso.
 Aluno associado à turma.
 Quantidade de vagas atualizada.
-🎯 Regra de Limite de Vagas
+
+##🎯 Regra de Limite de Vagas
 
 Cada turma possui um limite máximo de alunos.
 
 Exemplo:
 
 Turma:
-Limite: 30 alunos
+Limite: 5 alunos
 
-Ao tentar cadastrar o aluno número 31:
+Ao tentar cadastrar o aluno número 6:
 
 Resultado esperado:
 
 Sistema bloqueia a matrícula.
 Retorna mensagem informando que não existem vagas disponíveis.
-💡 Decisões de Implementação
+
+##💡 Decisões de Implementação
 
 Algumas decisões tomadas:
 
@@ -264,13 +266,15 @@ Uso de Spring Data JPA para persistência.
 Flyway para controle das migrations do banco.
 Docker para padronizar o ambiente do PostgreSQL.
 Swagger para documentação e testes da API.
-⚠️ Limitações Conhecidas
+
+## ⚠️ Limitações Conhecidas
+
 Sistema não possui autenticação de usuários.
 Controle de perfis de acesso ainda não implementado.
 Testes automatizados ainda estão em evolução.
 Sistema preparado inicialmente para ambiente acadêmico de pequeno porte.
 
-Projeto em desenvolvimento.
+## Projeto em desenvolvimento.
 
 ---
 
