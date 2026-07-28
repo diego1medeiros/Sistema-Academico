@@ -126,6 +126,27 @@ postgres
 Senha:
 1234
 
+## 📖 Documentação da API
+
+A API REST do Sistema Acadêmico possui documentação interativa utilizando Swagger/OpenAPI.
+
+A documentação permite visualizar e testar os endpoints diretamente pelo navegador.
+
+Acesse: http://localhost:8080/swagger-ui/index.htm
+
+## 🔗 Principais Endpoints
+
+| Recurso | Método | Endpoint | Descrição |
+|---|---|---|---|
+| Alunos | GET | /alunos | Lista alunos cadastrados |
+| Alunos | POST | /alunos | Cadastra aluno |
+| Alunos | PUT | /alunos/{id} | Atualiza aluno |
+| Alunos | DELETE | /alunos/{id} | Remove aluno |
+| Cursos | GET | /cursos | Lista cursos |
+| Disciplinas | GET | /disciplinas | Lista disciplinas |
+| Turmas | GET | /turmas | Lista turmas |
+| Matrículas | POST | /matriculas | Realiza matrícula |
+
 
 Projeto em desenvolvimento.
 
