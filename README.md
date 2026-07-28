@@ -123,30 +123,56 @@ Sistema-Academico
 ---
 
 
-## 🐳 Banco de Dados com Docker
+# 🐳 Banco de Dados
 
-O projeto utiliza PostgreSQL executado através do Docker Compose.
+O projeto utiliza **PostgreSQL 16**.
 
-### Subindo o banco de dados
+Existem duas formas de configurar o banco de dados:
+
+## Opção 1 - Docker (Recomendado)
+
+Suba o banco utilizando o Docker Compose:
 
 ```bash
 docker compose up -d
 ```
 
-### Serviços disponíveis
+Serviços disponíveis:
 
 | Serviço | Porta |
 |---------|------:|
 | PostgreSQL | 5432 |
 | PgAdmin | 8085 |
-Acesso PostgreSQL
 
-### Configuração PostgreSQL
+Configuração do banco:
 
 ```text
 Banco: matricula
 Usuário: postgres
 Senha: 1234
+```
+
+---
+
+## Opção 2 - PostgreSQL instalado localmente
+
+Caso não utilize Docker, instale o PostgreSQL 16 (ou versão compatível) e crie um banco de dados com a seguinte configuração:
+
+```text
+Banco: matricula
+Usuário: postgres
+Senha: 1234
+Porta: 5432
+```
+
+Depois, execute a aplicação normalmente. O Flyway criará automaticamente as tabelas e aplicará as migrations na primeira execução.
+
+Verifique também se o arquivo `application.properties` (ou `application.yml`) está configurado corretamente:
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/matricula
+spring.datasource.username=postgres
+spring.datasource.password=1234
 ```
 
 ## 🚀 Como executar o projeto localmente
