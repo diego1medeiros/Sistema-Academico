@@ -104,13 +104,27 @@ Sistema-Academico
 
 ## 🐳 Banco de Dados com Docker
 
-O projeto utiliza PostgreSQL executado via Docker Compose.
+O projeto utiliza PostgreSQL executado através do Docker Compose.
 
-Para iniciar o banco:
+### Subindo o banco de dados
 
+```bash
 docker compose up -d
-## 🚧 Status
 
+Serviços disponíveis
+Serviço	Porta
+PostgreSQL	5432
+PgAdmin	8085
+Acesso PostgreSQL
+
+Banco:
+matricula
+
+Usuário:
+postgres
+
+Senha:
+1234
 
 
 Projeto em desenvolvimento.
