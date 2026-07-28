@@ -1,6 +1,6 @@
 # 🎓 Sistema Acadêmico
 
-![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)
+![Java](https://img.shields.io/badge/Java-17-orange?logo=openjdk)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-6DB33F?logo=springboot)
 ![JSF](https://img.shields.io/badge/JSF-4.0-blue)
 ![PrimeFaces](https://img.shields.io/badge/PrimeFaces-13-blue)
@@ -106,17 +106,6 @@ Sistema-Academico
 
 ---
 
-## 📋 Funcionalidades
-
-- Cadastro de Alunos
-- Cadastro de Cursos
-- Cadastro de Disciplinas
-- Cadastro de Turmas
-- Controle de Matrículas
-- Dashboard
-
----
-
 ## 📂 Estrutura
 
 ```
@@ -142,32 +131,33 @@ O projeto utiliza PostgreSQL executado através do Docker Compose.
 
 ```bash
 docker compose up -d
+```
 
-Serviços disponíveis
-Serviço	Porta
-PostgreSQL	5432
-PgAdmin	8085
+### Serviços disponíveis
+
+| Serviço | Porta |
+|---------|------:|
+| PostgreSQL | 5432 |
+| PgAdmin | 8085 |
 Acesso PostgreSQL
 
-Banco:
-matricula
+### Configuração PostgreSQL
 
-Usuário:
-postgres
-
-Senha:
-1234
+```text
+Banco: matricula
+Usuário: postgres
+Senha: 1234
+```
 
 ## 🚀 Como executar o projeto localmente
 
-Pré-requisitos
-Instalar:
+### Pré-requisitos
 
-Java 17
-Maven
-Docker
-Docker Compose
-Git
+- Java 17
+- Maven
+- Docker
+- Docker Compose
+- Git
 
 Executar Banco
 
@@ -209,20 +199,22 @@ A API REST do Sistema Acadêmico possui documentação interativa utilizando Swa
 
 A documentação permite visualizar e testar os endpoints diretamente pelo navegador.
 
-Acesse: http://localhost:8080/swagger-ui/index.htm
+Acesse:[ http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
 ## 🔗 Principais Endpoints
 
-🔗 Principais Endpoints
-Recurso	Método	Endpoint	Descrição
-Alunos	GET	/alunos	Lista alunos
-Alunos	POST	/alunos	Cadastra aluno
-Alunos	PUT	/alunos/{id}	Atualiza aluno
-Alunos	DELETE	/alunos/{id}	Remove aluno
-Cursos	GET	/cursos	Lista cursos
-Disciplinas	GET	/disciplinas	Lista disciplinas
-Turmas	GET	/turmas	Lista turmas
-Matrículas	POST	/matriculas	Realiza matrícula
+Recurso Método Endpoint Descrição
+
+| Recurso | Método | Endpoint | Descrição |
+|---------|---------|----------|-----------|
+| Alunos | GET | /alunos | Lista alunos |
+| Alunos | POST | /alunos | Cadastra aluno |
+| Alunos | PUT | /alunos/{id} | Atualiza aluno |
+| Alunos | DELETE | /alunos/{id} | Remove aluno |
+| Cursos | GET | /cursos | Lista cursos |
+| Disciplinas | GET | /disciplinas | Lista disciplinas |
+| Turmas | GET | /turmas | Lista turmas |
+| Matrículas | POST | /matriculas | Realiza matrícula |
 
 
 ## 📝 Teste Manual do Fluxo de Matrícula
@@ -241,7 +233,7 @@ Matrícula criada com sucesso.
 Aluno associado à turma.
 Quantidade de vagas atualizada.
 
-##🎯 Regra de Limite de Vagas
+## 🎯 Regra de Limite de Vagas
 
 Cada turma possui um limite máximo de alunos.
 
@@ -257,22 +249,22 @@ Resultado esperado:
 Sistema bloqueia a matrícula.
 Retorna mensagem informando que não existem vagas disponíveis.
 
-##💡 Decisões de Implementação
+## 💡 Decisões de Implementação
 
 Algumas decisões tomadas:
 
-Separação entre frontend e backend.
-Uso de Spring Data JPA para persistência.
-Flyway para controle das migrations do banco.
-Docker para padronizar o ambiente do PostgreSQL.
-Swagger para documentação e testes da API.
+- Separação entre frontend e backend.
+- Uso de Spring Data JPA para persistência.
+- Flyway para versionamento do banco.
+- Docker para o PostgreSQL.
+- Swagger para documentação da API.
 
 ## ⚠️ Limitações Conhecidas
 
-Sistema não possui autenticação de usuários.
-Controle de perfis de acesso ainda não implementado.
-Testes automatizados ainda estão em evolução.
-Sistema preparado inicialmente para ambiente acadêmico de pequeno porte.
+- Não possui autenticação de usuários.
+- Não possui controle de perfis de acesso.
+- Testes automatizados ainda estão em evolução.
+- Sistema preparado inicialmente para ambiente acadêmico de pequeno porte.
 
 ## Projeto em desenvolvimento.
 
@@ -286,3 +278,7 @@ Desenvolvedor Java Backend / Full Stack
 
 GitHub:
 https://github.com/diego1medeiros
+
+## 📄 Licença
+
+Este projeto foi desenvolvido para fins acadêmicos e demonstração de conhecimentos em Java, Spring Boot, JSF e PostgreSQL.
