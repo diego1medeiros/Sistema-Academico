@@ -101,7 +101,17 @@ Sistema-Academico
 
 ---
 
+
+## 🐳 Banco de Dados com Docker
+
+O projeto utiliza PostgreSQL executado via Docker Compose.
+
+Para iniciar o banco:
+
+docker compose up -d
 ## 🚧 Status
+
+
 
 Projeto em desenvolvimento.
 
