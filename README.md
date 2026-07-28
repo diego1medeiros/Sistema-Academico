@@ -109,41 +109,7 @@ Sistema-Academico
 └── README.md
 ```
 
-## 📸 Capturas de Tela
 
-### Dashboard
-
-![Dashboard](docs/imagens/dashboard.png)
-
----
-
-### Cadastro de Alunos
-
-![Cadastro de Alunos](docs/imagens/alunos.png)
-
----
-
-### Cadastro de Cursos
-
-![Cadastro de Cursos](docs/imagens/cursos.png)
-
----
-
-### Cadastro de Turmas
-
-![Cadastro de Turmas](docs/imagens/turmas.png)
-
----
-
-### Matrículas
-
-![Matrículas](docs/imagens/matriculas.png)
-
----
-
-### Documentação da API (Swagger)
-
-![Swagger](docs/imagens/swagger-home.png)
 
 
 # 🐳 Banco de Dados
@@ -264,6 +230,45 @@ Recurso Método Endpoint Descrição
 | Disciplinas | GET | /disciplinas | Lista disciplinas |
 | Turmas | GET | /turmas | Lista turmas |
 | Matrículas | POST | /matriculas | Realiza matrícula |
+
+## 📸 Capturas de Tela
+
+### Dashboard
+
+![Dashboard](docs/imagens/dashboard.png)
+
+---
+
+### Cadastro de Alunos
+
+![Cadastro de Alunos](docs/imagens/alunos.png)
+
+---
+
+### Cadastro de Cursos
+
+![Cadastro de Cursos](docs/imagens/cursos.png)
+
+---
+
+### Cadastro de Turmas
+
+![Cadastro de Turmas](docs/imagens/turmas.png)
+
+---
+
+### Matrículas
+
+![Matrículas](docs/imagens/matriculas.png)
+
+---
+
+### Documentação da API (Swagger)
+
+![Swagger](docs/imagens/swagger-home.png)
+
+
+
 
 
 ## 📝 Teste Manual do Fluxo de Matrícula
