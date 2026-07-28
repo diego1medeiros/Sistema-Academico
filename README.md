@@ -9,7 +9,6 @@
 ![Maven](https://img.shields.io/badge/Maven-3.9-C71A36?logo=apachemaven)
 
 
-# 🎓 Sistema Acadêmico
 
 Sistema desenvolvido para gerenciamento acadêmico utilizando Java, Spring Boot, JSF e PrimeFaces.
 
