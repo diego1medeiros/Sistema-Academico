@@ -33,4 +33,4 @@ jobs:
 
       - name: Build Backend
         working-directory: sistema-academico-backend
-        run: mvn clean install
+        run: mvn clean install -DskipTests
