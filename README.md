@@ -2,7 +2,84 @@
 
 Sistema desenvolvido para gerenciamento acadêmico utilizando Java, Spring Boot, JSF e PrimeFaces.
 
-## Arquitetura
+---
+
+## 📚 Sobre o Projeto
+
+O Sistema Acadêmico permite o gerenciamento de:
+
+- 👨‍🎓 Alunos
+- 📖 Cursos
+- 📘 Disciplinas
+- 🏫 Turmas
+- 📝 Matrículas
+
+O projeto foi desenvolvido utilizando arquitetura cliente-servidor, com backend em Spring Boot e frontend em JSF + PrimeFaces.
+
+---
+
+## 🏗 Arquitetura
+
+```
+Sistema-Academico
+│
+├── sistema-academico-backend
+│     ├── Spring Boot
+│     ├── REST API
+│     ├── JPA
+│     ├── Flyway
+│     └── PostgreSQL
+│
+└── sistema-academico-frontend
+      ├── JSF
+      ├── PrimeFaces
+      └── Consome a API REST
+```
+
+---
+
+## 🚀 Tecnologias
+
+### Backend
+
+- Java 21
+- Spring Boot
+- Spring MVC
+- Spring Data JPA
+- Hibernate
+- Flyway
+- PostgreSQL
+- Maven
+
+### Frontend
+
+- Java 21
+- JSF
+- PrimeFaces
+- CDI
+- Maven
+
+### DevOps
+
+- Git
+- GitHub
+- Docker
+- GitHub Actions
+
+---
+
+## 📋 Funcionalidades
+
+- Cadastro de Alunos
+- Cadastro de Cursos
+- Cadastro de Disciplinas
+- Cadastro de Turmas
+- Controle de Matrículas
+- Dashboard
+
+---
+
+## 📂 Estrutura
 
 ```
 Sistema-Academico
@@ -12,40 +89,19 @@ Sistema-Academico
 └── sistema-academico-frontend
 ```
 
-## Tecnologias
+---
 
-### Backend
+## 🚧 Status
 
-- Java 21
-- Spring Boot
-- Spring MVC
-- Spring Data JPA
-- Hibernate
-- PostgreSQL
-- Flyway
+Projeto em desenvolvimento.
 
-### Frontend
+---
 
-- Java 21
-- JSF
-- PrimeFaces
-- CDI
+## 👨‍💻 Desenvolvedor
 
-### DevOps
+Diego Medeiros Jesus
 
-- Docker
-- Docker Compose
-- GitHub Actions
+Desenvolvedor Java Backend / Full Stack
 
-## Funcionalidades
-
-- Cadastro de Alunos
-- Cadastro de Cursos
-- Cadastro de Disciplinas
-- Cadastro de Turmas
-- Controle de Matrículas
-- Dashboard
-
-## Status
-
-🚧 Em desenvolvimento
+GitHub:
+https://github.com/diego1medeiros
