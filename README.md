@@ -45,12 +45,6 @@ Sistema-Academico
       ├── PrimeFaces
       └── Consome a API REST
 ```
-
----
-
-
----
-
 # 🚀 Tecnologias
 
 ## Backend
@@ -103,11 +97,6 @@ Sistema-Academico
 
 # 📂 Estrutura do Projeto
 
-
----
-
-## 📂 Estrutura
-
 ```
 Sistema-Academico
 │
@@ -120,7 +109,41 @@ Sistema-Academico
 └── README.md
 ```
 
+## 📸 Capturas de Tela
+
+### Dashboard
+
+![Dashboard](docs/imagens/dashboard.png)
+
 ---
+
+### Cadastro de Alunos
+
+![Cadastro de Alunos](docs/imagens/alunos.png)
+
+---
+
+### Cadastro de Cursos
+
+![Cadastro de Cursos](docs/imagens/cursos.png)
+
+---
+
+### Cadastro de Turmas
+
+![Cadastro de Turmas](docs/imagens/turmas.png)
+
+---
+
+### Matrículas
+
+![Matrículas](docs/imagens/matriculas.png)
+
+---
+
+### Documentação da API (Swagger)
+
+![Swagger](docs/imagens/swagger-home.png)
 
 
 # 🐳 Banco de Dados
