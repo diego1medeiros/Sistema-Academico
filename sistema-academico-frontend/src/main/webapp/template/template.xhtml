@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html"
+	xmlns:p="http://primefaces.org/ui" xmlns:ui="jakarta.faces.facelets">
+
+<h:head>
+<h:outputStylesheet library="css" name="style.css"/>
+	<title>Sistema Acadêmico</title>
+</h:head>
+
+<h:body
+style="
+background-image:url('#{resource['images/background.png']}');
+background-size:cover;
+background-repeat:no-repeat;
+background-position:center;
+background-attachment:fixed;">
+
+	<div style="height: 100vh; display: flex; flex-direction: column;">
+		<div style="padding: 15px; border-bottom: 1px solid #ccc;">
+			<h3 style="font-weight: bold; font-size: 32px "> 🎓 Sistema Acadêmico</h3>
+		</div>
+		<div style="flex: 1; display: flex;">
+			<div
+				style="width: 250px; border-right: 1px solid #ccc; padding: 10px;">
+
+				<p:menu>
+
+					<p:menuitem value="Dashboard" url="/pages/dashboard.xhtml" style="font-weight: bold; font-size: 22px "
+						icon="pi pi-home" />
+
+					<p:menuitem value="Alunos" url="/pages/aluno/listar.xhtml" style="font-weight: bold; font-size: 22px "
+						icon="pi pi-users" />
+
+					<p:menuitem value="Cursos" url="/pages/cursos/listar.xhtml" style="font-weight: bold; font-size: 22px "
+						icon="pi pi-book" />
+
+					<p:menuitem value="Disciplinas" style="font-weight: bold; font-size: 22px "
+						url="/pages/disciplina/listar.xhtml" icon="pi pi-list" />
+
+					<p:menuitem value="Turmas" url="/pages/turma/listar.xhtml" style="font-weight: bold; font-size: 22px "
+						icon="pi pi-calendar" />
+
+					<p:menuitem value="Matrículas" url="/pages/matricula/listar.xhtml" style="font-weight: bold; font-size: 22px "
+						icon="pi pi-check" />
+
+				</p:menu>
+			</div>
+
+			
+			<div style="flex: 1; padding: 20px;">
+				<ui:insert name="conteudo" />
+			</div>
+
+		</div>
+
+	</div>
+
+</h:body>
+
+</html>

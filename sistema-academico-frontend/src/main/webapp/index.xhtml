@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<ui:composition
+        template="/template/layout.xhtml"
+
+        xmlns="http://www.w3.org/1999/xhtml"
+
+        xmlns:h="jakarta.faces.html"
+
+        xmlns:ui="jakarta.faces.facelets"
+
+        xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+
+        <h2>Dashboard</h2>
+
+        <p>Bem-vindo ao Sistema Acadêmico.</p>
+
+        <div class="grid">
+
+            <div class="col-12 md:col-3">
+
+                <p:card styleClass="card-dashboard">
+
+                    <h3>👨 Alunos</h3>
+
+                    <h1>
+                        #{dashboardBean.totalAlunos}
+                    </h1>
+
+                </p:card>
+
+            </div>
+
+            <div class="col-12 md:col-3">
+
+                <p:card styleClass="card-dashboard">
+
+                    <h3>📚 Cursos</h3>
+
+                    <h1>
+                        #{dashboardBean.totalCursos}
+                    </h1>
+
+                </p:card>
+
+            </div>
+
+            <div class="col-12 md:col-3">
+
+                <p:card styleClass="card-dashboard">
+
+                    <h3>🏫 Turmas</h3>
+
+                    <h1>
+                        #{dashboardBean.totalTurmas}
+                    </h1>
+
+                </p:card>
+
+            </div>
+
+            <div class="col-12 md:col-3">
+
+                <p:card styleClass="card-dashboard">
+
+                    <h3>📝 Matrículas</h3>
+
+                    <h1>
+                        #{dashboardBean.totalMatriculas}
+                    </h1>
+
+                </p:card>
+
+            </div>
+
+        </div>
+
+        <br/>
+
+        <p:panel header="Últimas Matrículas">
+
+            <p:dataTable>
+
+                <p:column headerText="Aluno">
+                    João Silva
+                </p:column>
+
+                <p:column headerText="Curso">
+                    ADS
+                </p:column>
+
+                <p:column headerText="Status">
+
+                    <p:tag
+                            value="Confirmada"
+                            severity="success"/>
+
+                </p:column>
+
+            </p:dataTable>
+
+        </p:panel>
+
+        <br/>
+
+        <p:panel header="Alertas">
+
+            <ul>
+
+                <li>3 turmas estão sem vagas.</li>
+
+                <li>5 matrículas aguardando confirmação.</li>
+
+            </ul>
+
+        </p:panel>
+
+    </ui:define>
+
+</ui:composition>

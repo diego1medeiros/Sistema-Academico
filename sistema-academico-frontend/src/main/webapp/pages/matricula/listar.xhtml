@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template/template.xhtml">
+
+	<ui:define name="conteudo">
+
+		<h:form id="form">
+
+			<p:growl id="msg" showDetail="true" life="4000" sticky="false" />
+			<p:card style="margin-bottom:20px">
+
+				<f:facet name="title">
+					<i class="pi pi-user-plus"></i>
+                Cadastro de Matrículas
+                 </f:facet>
+
+				<p:panelGrid columns="1" layout="grid"
+					columnClasses="ui-g-12 ui-md-6,ui-g-12 ui-md-6"
+					styleClass="ui-fluid">
+
+					<p:outputLabel value="Aluno" style="font-weight: bold; font-size: 22px "  />
+
+					<p:selectOneMenu value="#{matriculaBean.alunoId}">
+						<f:selectItem itemLabel="Selecione o aluno." itemValue="#{null}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{matriculaBean.alunos}" var="a"
+							itemLabel="#{a.nome}" itemValue="#{a.id}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Turma" style="font-weight: bold; font-size: 22px " />
+
+					<p:selectOneMenu value="#{matriculaBean.turmaId}">
+						<f:selectItem itemLabel="Selecione a turma." itemValue="#{null}"
+							noSelectionOption="true" />
+
+						<f:selectItems value="#{matriculaBean.turmas}" var="t"
+							itemLabel="#{t.disciplinaNome} - Vagas: #{t.vagasDisponiveis}"
+							itemValue="#{t.id}" />
+					</p:selectOneMenu>
+
+				</p:panelGrid>
+
+				<br />
+
+				<p:commandButton value="Matricular" icon="pi pi-save"
+					action="#{matriculaBean.salvarMatricula}" update="@form msg"
+					styleClass="ui-button-success" />
+			</p:card>
+
+			<br />
+
+			<p:card style="margin-bottom:20px">
+
+				<f:facet name="title">
+
+					<i class="pi pi-search"></i>
+
+Consultar Matrículas
+
+</f:facet>
+
+				<p:panelGrid columns="2" layout="grid"
+					columnClasses="ui-g-12 ui-md-6,ui-g-12 ui-md-6"
+					styleClass="ui-fluid">
+
+					<p:panel header="Pesquisar por Aluno">
+
+						<p:selectOneMenu value="#{matriculaBean.alunoFiltro}">
+							<f:selectItem itemLabel="Selecione o aluno" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{matriculaBean.alunos}" var="a"
+								itemLabel="#{a.nome}" itemValue="#{a.id}" />
+						</p:selectOneMenu>
+
+						<br />
+						<br />
+
+						<p:commandButton value="Consultar aluno" icon="pi pi-search"
+							action="#{matriculaBean.buscarPorAluno}" update="tabela msg" />
+
+					</p:panel>
+
+					<p:panel header="Pesquisar por Turma">
+
+						<p:selectOneMenu value="#{matriculaBean.turmaFiltro}">
+							<f:selectItem itemLabel="Selecione a turma" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{matriculaBean.turmas}" var="t"
+								itemLabel="#{t.disciplinaNome}" itemValue="#{t.id}" />
+						</p:selectOneMenu>
+
+						<br />
+						<br />
+
+						<p:commandButton value="Consultar turma" icon="pi pi-search"
+							action="#{matriculaBean.buscarPorTurma}" update="tabela msg" />
+
+					</p:panel>
+
+				</p:panelGrid>
+
+				<br />
+
+				<p:commandButton value="Limpar" icon="pi pi-refresh"
+					action="#{matriculaBean.limparConsulta}" update="@form"
+					styleClass="ui-button-secondary" />
+
+			</p:card>
+
+
+
+
+			<f:facet name="title">
+
+				<i class="pi pi-list"></i>
+
+Resultado da Consulta
+
+</f:facet>
+
+			<p:dataTable id="tabela" value="#{matriculaBean.matriculas}" var="m"
+				paginator="true" rows="8" stripedRows="true"
+				responsiveLayout="scroll"
+				emptyMessage="Nenhuma matrícula encontrada">
+
+				<p:column headerText="Aluno">
+        #{m.alunoNome}
+    </p:column>
+
+				<p:column headerText="Curso">
+        #{m.curso}
+    </p:column>
+
+				<p:column headerText="Disciplina">
+        #{m.disciplina}
+    </p:column>
+
+				<p:column headerText="Data">
+        #{m.dataMatricula}
+    </p:column>
+
+				<p:column headerText="Status">
+
+					<p:tag value="#{m.status}"
+						severity="#{
+               m.status eq 'CONFIRMADA' ? 'success' :
+               m.status eq 'PENDENTE' ? 'warning' :
+               'danger'
+           }" />
+
+				</p:column>
+
+
+				<p:column headerText="Ações">
+
+					<p:commandButton icon="pi pi-check" title="Confirmar"
+						styleClass="ui-button-success ui-button-rounded"
+						action="#{matriculaBean.confirmarMatricula(m.id)}" update="@form"
+						disabled="#{m.status eq 'CONFIRMADA'}" />
+
+					<p:commandButton icon="pi pi-times" title="Cancelar"
+						styleClass="ui-button-danger ui-button-rounded"
+						action="#{matriculaBean.cancelarMatricula(m.id)}" update="@form"
+						disabled="#{m.status eq 'CANCELADA'}" />
+
+				</p:column>
+
+
+
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>

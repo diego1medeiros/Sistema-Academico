@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template/template.xhtml">
+
+	<ui:define name="conteudo">
+
+		<h:form id="formTurma">
+
+			<p:growl id="growl" showDetail="true" />
+
+			<p:toolbar style="margin-bottom:15px">
+
+				<p:toolbarGroup>
+					<h2>
+						<i class="pi pi-calendar"></i> Cadastro de Turmas
+					</h2>
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+
+					<p:commandButton value="Nova Turma" icon="pi pi-plus"
+						styleClass="ui-button-success" action="#{turmaBean.novoTurma}"
+						update=":formTurma:dialogTurma" oncomplete="PF('dlgTurma').show()" />
+
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+			<p:dataTable id="tabela" value="#{turmaBean.turmas}" var="turma"
+				paginator="true" rows="10" stripedRows="true"
+				responsiveLayout="scroll">
+
+
+
+				<p:column headerText="Disciplina">
+                    #{turma.disciplinaNome}
+                </p:column>
+
+				<p:column headerText="Vagas">
+                    #{turma.vagas}
+                </p:column>
+
+				<p:column headerText="Disponíveis">
+                    #{turma.vagasDisponiveis}
+                </p:column>
+
+				<p:column headerText="Status">
+                    #{turma.status}
+                </p:column>
+
+				<p:column headerText="Ações" width="170">
+
+					<p:commandButton icon="pi pi-pencil" styleClass="ui-button-warning"
+						process="@this" action="#{turmaBean.editarTurma(turma)}"
+						update=":formTurma:dialogTurma" oncomplete="PF('dlgTurma').show()" />
+
+					<p:spacer width="10" />
+
+					<p:commandButton icon="pi pi-trash" styleClass="ui-button-danger"
+						process="@this" action="#{turmaBean.excluirTurma(turma)}"
+						update="@form growl">
+
+						<p:confirm header="Confirmação"
+							message="Deseja excluir esta turma?"
+							icon="pi pi-exclamation-triangle" />
+
+					</p:commandButton>
+
+				</p:column>
+
+			</p:dataTable>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+				responsive="true">
+
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes ui-button-danger" />
+
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no ui-button-secondary" />
+
+			</p:confirmDialog>
+
+			<p:dialog id="dialogTurma" widgetVar="dlgTurma"
+				header="Cadastro de Turma" modal="true" width="600">
+
+				<p:panelGrid columns="2" styleClass="ui-fluid">
+
+					<p:outputLabel value="Disciplina" />
+
+					<p:selectOneMenu value="#{turmaBean.turma.disciplinaId}"
+						required="true">
+
+						<f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+
+						<f:selectItems value="#{turmaBean.disciplinas}" var="disciplina"
+							itemLabel="#{disciplina.nome}" itemValue="#{disciplina.id}" />
+
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Vagas" />
+
+					<p:inputNumber value="#{turmaBean.turma.vagas}" decimalPlaces="0" />
+
+					<p:outputLabel value="Vagas Disponíveis" />
+
+					<p:inputNumber value="#{turmaBean.turma.vagasDisponiveis}"
+						decimalPlaces="0" />
+
+					<p:outputLabel value="Status" />
+
+					<p:selectOneMenu value="#{turmaBean.turma.status}">
+
+						<f:selectItem itemLabel="Aberta" itemValue="ABERTA" />
+
+						<f:selectItem itemLabel="Fechada" itemValue="FECHADA" />
+						<f:selectItem itemLabel="Cancelada" itemValue="CANCELADA" />
+
+
+					</p:selectOneMenu>
+
+				</p:panelGrid>
+
+				<f:facet name="footer">
+
+					<p:commandButton value="Salvar" icon="pi pi-save"
+						styleClass="ui-button-info" action="#{turmaBean.salvarTurma}"
+						update=":formTurma" oncomplete="PF('dlgTurma').hide()" />
+
+					<p:commandButton value="Cancelar" icon="pi pi-times" type="button"
+						styleClass="ui-button-secondary" onclick="PF('dlgTurma').hide()" />
+
+				</f:facet>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

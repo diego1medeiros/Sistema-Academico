@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/template/template.xhtml">
+
+
+<ui:define name="conteudo">
+
+
+<p:panel header="Dashboard Acadêmico">
+
+
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+
+    <div style="flex:1; min-width:220px;">
+        <p:card styleClass="shadow-4">
+            <div style="text-align:center">
+                <i class="pi pi-users" style="font-size:45px;color:#2563eb;"></i>
+                <h1>#{dashboardBean.totalAlunos}</h1>
+                <h3>Alunos</h3>
+            </div>
+        </p:card>
+    </div>
+
+    <div style="flex:1; min-width:220px;">
+        <p:card styleClass="shadow-4">
+            <div style="text-align:center">
+                <i class="pi pi-book" style="font-size:45px;color:#16a34a;"></i>
+                <h1>#{dashboardBean.totalCursos}</h1>
+                <h3>Cursos</h3>
+            </div>
+        </p:card>
+    </div>
+
+    <div style="flex:1; min-width:220px;">
+        <p:card styleClass="shadow-4">
+            <div style="text-align:center">
+                <i class="pi pi-calendar" style="font-size:45px;color:#f59e0b;"></i>
+                <h1>#{dashboardBean.totalTurmas}</h1>
+                <h3>Turmas</h3>
+            </div>
+        </p:card>
+    </div>
+
+    <div style="flex:1; min-width:220px;">
+        <p:card styleClass="shadow-4">
+            <div style="text-align:center">
+                <i class="pi pi-id-card" style="font-size:45px;color:#9333ea;"></i>
+                <h1>#{dashboardBean.totalMatriculas}</h1>
+                <h3>Matrículas</h3>
+            </div>
+        </p:card>
+    </div>
+
+</div>
+
+
+</p:panel>
+
+
+
+
+
+<br/>
+
+
+<p:panel header="Últimas Matrículas">
+
+    <p:dataTable value="#{dashboardBean.ultimasMatriculas}"
+                 var="mat"
+                 stripedRows="true"
+                 responsiveLayout="scroll"
+                 emptyMessage="Nenhuma matrícula encontrada.">
+
+        <p:column headerText="Aluno">
+            #{mat.alunoNome}
+        </p:column>
+
+        <p:column headerText="Curso">
+            #{mat.curso}
+        </p:column>
+
+        <p:column headerText="Disciplina">
+            #{mat.disciplina}
+        </p:column>
+
+        
+
+        <p:column headerText="Data">
+            #{mat.dataMatricula}
+        </p:column>
+<p:column headerText="Status">
+
+    <p:tag value="#{mat.status}"
+           severity="#{mat.status eq 'CONFIRMADA' ? 'success' :
+                       mat.status eq 'PENDENTE' ? 'warning' :
+                       'danger'}"/>
+
+</p:column>
+    </p:dataTable>
+
+</p:panel>
+
+
+
+</ui:define>
+
+
+</ui:composition>
+
+
+</html>

@@ -1,0 +1,120 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Segoe UI, Arial, sans-serif;
+
+    background:#f4f6f9;
+
+}
+
+.topbar{
+
+    height:70px;
+
+    background:#1565C0;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 30px;
+
+}
+
+.logo{
+
+    font-size:26px;
+
+    font-weight:bold;
+
+}
+
+.usuario{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.sidebar{
+
+    position:fixed;
+
+    top:70px;
+
+    width:250px;
+
+    height:100vh;
+
+    background:white;
+
+    border-right:1px solid #ddd;
+
+}
+
+.content{
+
+    margin-left:270px;
+
+    margin-top:90px;
+
+    padding:30px;
+
+}
+
+.footer{
+
+    margin-left:250px;
+
+    padding:15px;
+
+    text-align:center;
+
+    color:#666;
+
+}
+
+.card-dashboard{
+
+    text-align:center;
+
+    transition:.3s;
+
+    border-radius:10px;
+
+}
+
+.card-dashboard:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+}
+
+.card-dashboard h1{
+
+    font-size:40px;
+
+    color:#1565C0;
+
+}
+
+.card-dashboard h3{
+
+    color:#666;
+
+}
+

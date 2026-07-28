@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" xmlns:ui="jakarta.faces.facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template/template.xhtml">
+
+	<ui:define name="conteudo">
+
+		<h:form id="formDisciplina">
+
+			<p:growl id="growl" showDetail="true" />
+
+			<p:toolbar style="margin-bottom:15px">
+
+				<p:toolbarGroup>
+					<h2>
+						<i class="pi pi-list"></i> Cadastro de Disciplinas
+					</h2>
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+
+					<p:commandButton value="Nova Disciplina" icon="pi pi-plus"
+						styleClass="ui-button-success" action="#{disciplinaBean.novaDisciplina}"
+						update="dialogDisciplina" oncomplete="PF('dlgDisciplina').show()" />
+
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+			<p:dataTable id="tabela" value="#{disciplinaBean.disciplinas}"
+				var="disciplina" paginator="true" rows="10" stripedRows="true"
+				responsiveLayout="scroll">
+
+				
+
+				<p:column headerText="Nome">
+                    #{disciplina.nome}
+                </p:column>
+
+				<p:column headerText="Curso">
+                  #{disciplina.cursoNome}
+                 </p:column>
+
+				
+
+				<p:column headerText="Ações" width="180">
+
+					<p:commandButton icon="pi pi-pencil" styleClass="ui-button-warning"
+						process="@this" action="#{disciplinaBean.editarDisciplina(disciplina)}"
+						update=":formDisciplina:dialogDisciplina" oncomplete="PF('dlgDisciplina').show()" />
+
+					<p:spacer width="10" />
+
+					<p:commandButton icon="pi pi-trash" styleClass="ui-button-danger"
+						process="@this" action="#{disciplinaBean.excluirDisciplina(disciplina)}"
+						update="@form growl">
+
+						<p:confirm header="Confirmação"
+							message="Deseja excluir este curso?"
+							icon="pi pi-exclamation-triangle" />
+
+					</p:commandButton>
+
+				</p:column>
+
+
+			</p:dataTable>
+<p:confirmDialog global="true"
+                 showEffect="fade"
+                 hideEffect="fade"
+                 responsive="true">
+
+    <p:commandButton value="Sim"
+                     type="button"
+                     styleClass="ui-confirmdialog-yes ui-button-danger"
+                     icon="pi pi-check"/>
+
+    <p:commandButton value="Não"
+                     type="button"
+                     styleClass="ui-confirmdialog-no ui-button-secondary"
+                     icon="pi pi-times"/>
+
+</p:confirmDialog>
+			<p:dialog id="dialogDisciplina" widgetVar="dlgDisciplina"
+				header="Cadastro de Disciplina" modal="true" width="600">
+
+				<p:panelGrid columns="2" styleClass="ui-fluid">
+
+					<p:outputLabel value="Nome" />
+					<p:inputText value="#{disciplinaBean.disciplina.nome}"
+						required="true" />
+
+
+					<p:outputLabel value="Curso" />
+					<p:selectOneMenu value="#{disciplinaBean.disciplina.cursoId}">
+						<f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+						<f:selectItems value="#{disciplinaBean.cursos}" var="curso"
+							itemLabel="#{curso.nome}" itemValue="#{curso.id}" />
+
+					</p:selectOneMenu>
+
+				</p:panelGrid>
+
+				<f:facet name="footer">
+
+					<p:commandButton value="Salvar" icon="pi pi-save"
+						styleClass="ui-button-info" action="#{disciplinaBean.salvarDisciplina}"
+						update=":formDisciplina" oncomplete="PF('dlgDisciplina').hide()" />
+
+					<p:commandButton value="Cancelar" icon="pi pi-times" type="button"
+						styleClass="ui-button-secondary"
+						onclick="PF('dlgDisciplina').hide()" />
+
+				</f:facet>
+
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>
