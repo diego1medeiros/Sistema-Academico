@@ -45,6 +45,40 @@ Sistema-Academico
       ├── PrimeFaces
       └── Consome a API REST
 ```
+
+## 🏗 Diagrama de Arquitetura
+                 
+                 Usuário
+                    │
+                    ▼
+      +---------------------------+
+      | Frontend                  |
+      | JSF + PrimeFaces          |
+      +---------------------------+
+                    │
+              HTTP / REST
+                    │
+                    ▼
+      +---------------------------+
+      | Backend                   |
+      | Spring Boot REST API      |
+      | Spring Data JPA           |
+      | Hibernate                 |
+      | Flyway                    |
+      +---------------------------+
+                    │
+                    ▼
+      +---------------------------+
+      | PostgreSQL                |
+      | Docker                    |
+      +---------------------------+
+
+          Swagger/OpenAPI
+                │
+        GitHub Actions (CI)
+
+
+
 # 🚀 Tecnologias
 
 ## Backend
