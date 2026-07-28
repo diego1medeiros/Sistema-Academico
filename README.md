@@ -242,6 +242,9 @@ Recurso Método Endpoint Descrição
 ### Cadastro de Alunos
 
 ![Cadastro de Alunos](docs/imagens/alunos.png)
+![Cadastro de Alunos](docs/imagens/alunos1.png)
+![Cadastro de Alunos](docs/imagens/alunos2.png)
+![Cadastro de Alunos](docs/imagens/alunos4.png)
 
 ---
 
