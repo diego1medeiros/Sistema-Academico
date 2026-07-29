@@ -9,10 +9,33 @@
 ![Maven](https://img.shields.io/badge/Maven-3.9-C71A36?logo=apachemaven)
 
 
+Sistema de Gestão Acadêmica desenvolvido para demonstrar conhecimentos em Java, Spring Boot, JSF, PrimeFaces, PostgreSQL e Docker.
 
-Sistema desenvolvido para gerenciamento acadêmico utilizando Java, Spring Boot, JSF e PrimeFaces.
-
+A aplicação permite o gerenciamento de alunos, cursos, disciplinas, turmas e matrículas, aplicando regras de negócio como controle de vagas, confirmação e cancelamento de matrículas.
 ---
+## 📑 Sumário
+
+- 📚 Sobre o Projeto
+- 🎥 Demonstração
+- 🏗 Arquitetura
+- 🚀 Tecnologias
+- 📋 Funcionalidades
+- 📂 Estrutura do Projeto
+- 🐳 Banco de Dados
+- 🚀 Como Executar
+- 📚 Documentação Técnica
+- 📖 Swagger
+- 🔗 Endpoints
+- 📸 Capturas de Tela
+- 📝 Fluxo de Matrícula
+- 🎯 Regras de Negócio
+- 💡 Decisões
+- ⚠️ Limitações
+- 👨‍💻 Desenvolvedor
+
+
+
+
 
 ## 📚 Sobre o Projeto
 
