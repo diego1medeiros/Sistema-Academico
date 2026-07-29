@@ -10,6 +10,10 @@ import br.com.sistemaacademico.entity.Disciplina;
 public interface DisciplinaRepository extends JpaRepository<Disciplina, Long> {
 
     List<Disciplina> findByCurso(Curso curso);
+
+	boolean existsByNomeAndCursoIdAndIdNot(String nome, Long cursoId, Long id);
+
+	boolean existsByNomeAndCursoId(String nome, Long cursoId);
     
 
 }

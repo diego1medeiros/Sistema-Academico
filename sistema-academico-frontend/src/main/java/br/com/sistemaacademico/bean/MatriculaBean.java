@@ -21,6 +21,21 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Bean responsável pelo gerenciamento das matrículas acadêmicas.
+ *
+ * <p>
+ * Controla as operações realizadas na tela de matrículas, incluindo cadastro,
+ * confirmação, cancelamento e consultas por aluno ou turma.
+ * </p>
+ *
+ * <p>
+ * Atua como camada de comunicação entre a interface JSF e os serviços
+ * responsáveis pelas regras de negócio.
+ * </p>
+ *
+ * @author Diego Medeiros Jesus
+ */
 @Getter
 @Setter
 @Component
@@ -49,8 +64,16 @@ public class MatriculaBean implements Serializable {
 	private Long turmaFiltro;
 	private MatriculaDTO matricula;
 
+	/**
+	 * Inicializa os dados necessários para carregamento da tela.
+	 *
+	 * <p>
+	 * Carrega alunos, turmas e matrículas existentes quando o Bean é criado pelo
+	 * JSF.
+	 * </p>
+	 */
 	@PostConstruct
-	public void iniinicializar() {
+	public void inicializar() {
 
 		matricula = new MatriculaDTO();
 		alunos = alunoService.listarAlunos();
@@ -59,6 +82,13 @@ public class MatriculaBean implements Serializable {
 
 	}
 
+	/**
+	 * Atualiza os dados exibidos na tela de matrículas.
+	 *
+	 * <p>
+	 * Realiza novamente a consulta de alunos, turmas e matrículas cadastradas.
+	 * </p>
+	 */
 	public void carregarMatriculas() {
 
 		matriculas = matriculaService.listarMatriculas();
@@ -67,10 +97,23 @@ public class MatriculaBean implements Serializable {
 
 	}
 
+	/**
+	 * Realiza o cadastro de uma nova matrícula.
+	 *
+	 * <p>
+	 * Valida se aluno e turma foram selecionados antes de enviar a solicitação para
+	 * o serviço.
+	 * </p>
+	 *
+	 * <p>
+	 * As regras de negócio como turma aberta, limite de vagas e matrícula duplicada
+	 * são tratadas pelo backend.
+	 * </p>
+	 */
 	public void salvarMatricula() {
 
 		if (alunoId == null || turmaId == null) {
-			MensagemUtils.warr("Atenção", "Selecione um aluno e uma turma.");
+			MensagemUtils.warn("Atenção", "Selecione um aluno e uma turma.");
 			return;
 		}
 		try {
@@ -84,56 +127,71 @@ public class MatriculaBean implements Serializable {
 		}
 	}
 
-
+	/**
+	 * Confirma uma matrícula pendente.
+	 *
+	 * @param id identificador da matrícula
+	 */
 	public void confirmarMatricula(Long id) {
 
-	    try {
+		try {
 
-	        matriculaService.confirmarMatricula(id);
-	        MensagemUtils.info("Sucesso", "Matrícula confirmada com sucesso.");
-	        carregarMatriculas();
+			matriculaService.confirmarMatricula(id);
+			MensagemUtils.info("Sucesso", "Matrícula confirmada com sucesso.");
+			carregarMatriculas();
 
-	    } catch (WebClientResponseException e) {
+		} catch (WebClientResponseException e) {
 
-	        MensagemUtils.erro("Erro", e.getResponseBodyAsString());
+			MensagemUtils.erro("Erro", e.getResponseBodyAsString());
 
-	    } catch (Exception e) {
+		} catch (Exception e) {
 
-	        MensagemUtils.erro("Erro", "Não foi possível confirmar a matrícula.");
+			MensagemUtils.erro("Erro", "Não foi possível confirmar a matrícula.");
 
-	    }
+		}
 	}
+
+	/**
+	 * Cancela uma matrícula existente.
+	 *
+	 * @param id identificador da matrícula
+	 */
 	public void cancelarMatricula(Long id) {
 		matriculaService.cancelarMatricula(id);
-        MensagemUtils.info("Sucesso", "Matrícula cancelada com sucesso.");
+		MensagemUtils.info("Sucesso", "Matrícula cancelada com sucesso.");
 
 		carregarMatriculas();
 
 	}
 
+	/**
+	 * Busca matrículas realizadas por um aluno específico.
+	 */
 	public void buscarPorAluno() {
 
 		if (alunoFiltro == null) {
-			MensagemUtils.warr("Atenção", "Selecione um aluno");
+			MensagemUtils.warn("Atenção", "Selecione um aluno");
 
 			return;
 		}
-		matriculas = matriculaService.buscarPorAluno(alunoFiltro);
+		matriculas = matriculaService.listarAluno(alunoFiltro);
 
 		if (matriculas.isEmpty()) {
 			MensagemUtils.erro("Consulta", "Aluno não possui matrículas");
 
 		}
-
 	}
 
+	/**
+	 * Busca matrículas vinculadas a uma turma específica.
+	 */
 	public void buscarPorTurma() {
 		if (turmaFiltro == null) {
-			MensagemUtils.warr("Atenção", "Selecione uma turma");
+			MensagemUtils.warn("Atenção", "Selecione uma turma");
 			return;
 		}
 
-		matriculas = matriculaService.buscarPorTurma(turmaFiltro);
+		matriculas = matriculaService.listarTurma(turmaFiltro);
 
 		if (matriculas.isEmpty()) {
 			MensagemUtils.erro("Consulta", "Turma não possui alunos matriculados");
@@ -142,6 +200,9 @@ public class MatriculaBean implements Serializable {
 
 	}
 
+	/**
+	 * Limpa os filtros de pesquisa e recarrega os dados da tela.
+	 */
 	public void limparConsulta() {
 		matriculas = null;
 		alunoFiltro = null;

@@ -43,13 +43,22 @@ public class DisciplinaService {
 	 * @param dto dados da disciplina
 	 * @return disciplina cadastrada
 	 */
-	public Disciplina cadastrarDisciplina(DisciplinaDTO dto) {
+	public Disciplina cadastrarDisciplina(DisciplinaDTO disciplinaDTO) {
 
-		Curso curso = cursoRepository.findById(dto.getCursoId())
+		Curso curso = cursoRepository.findById(disciplinaDTO.getCursoId())
 				.orElseThrow(() -> new RegraNegocioException("Curso não encontrado."));
+		
+		 if (disciplinaRepository.existsByNomeAndCursoId(
+				 disciplinaDTO.getNome(),
+				 disciplinaDTO.getCursoId())) {
+
+		        throw new RegraNegocioException(
+		                "Já existe uma disciplina com esse nome neste curso."
+		        );
+		    }
 
 		Disciplina disciplina = new Disciplina();
-		disciplina.setNome(dto.getNome());
+		disciplina.setNome(disciplinaDTO.getNome());
 		disciplina.setCurso(curso);
 
 		return disciplinaRepository.save(disciplina);
@@ -69,15 +78,38 @@ public class DisciplinaService {
 	 * @return disciplina atualizada
 	 * @throws RegraNegocioException caso a disciplina ou o curso não sejam encontrados
 	 */
-	public Disciplina atualizarDisciplina(DisciplinaDTO dto) {
+	/**
+	 * Atualiza uma disciplina existente.
+	 *
+	 * @param dto dados atualizados da disciplina
+	 * @return disciplina atualizada
+	 * @throws RegraNegocioException caso a disciplina ou curso não existam
+	 * ou já exista outra disciplina com o mesmo nome no curso
+	 */
+	public Disciplina atualizarDisciplina(DisciplinaDTO disciplinaDTO) {
 
-	    Disciplina disciplina = disciplinaRepository.findById(dto.getId())
-	            .orElseThrow(() -> new RegraNegocioException("Disciplina não encontrada."));
+	    Disciplina disciplina = disciplinaRepository.findById(disciplinaDTO.getId())
+	            .orElseThrow(() -> 
+	                new RegraNegocioException("Disciplina não encontrada.")
+	            );
 
-	    Curso curso = cursoRepository.findById(dto.getCursoId())
-	            .orElseThrow(() -> new RegraNegocioException("Curso não encontrado."));
+	    Curso curso = cursoRepository.findById(disciplinaDTO.getCursoId())
+	            .orElseThrow(() -> 
+	                new RegraNegocioException("Curso não encontrado.")
+	            );
 
-	    disciplina.setNome(dto.getNome());
+	    if (disciplinaRepository.existsByNomeAndCursoIdAndIdNot(
+	    		disciplinaDTO.getNome(),
+	    		disciplinaDTO.getCursoId(),
+	    		disciplinaDTO.getId())) {
+
+	        throw new RegraNegocioException(
+	                "Já existe uma disciplina com esse nome neste curso."
+	        );
+	    }
+
+
+	    disciplina.setNome(disciplinaDTO.getNome());
 	    disciplina.setCurso(curso);
 
 	    return disciplinaRepository.save(disciplina);

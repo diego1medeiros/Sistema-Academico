@@ -17,7 +17,7 @@ public class MensagemUtils {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
-	public static void warr(String warr, String mesangem) {
+	public static void warn(String warr, String mesangem) {
 
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, warr, mesangem);
 		FacesContext.getCurrentInstance().addMessage(null, message);
