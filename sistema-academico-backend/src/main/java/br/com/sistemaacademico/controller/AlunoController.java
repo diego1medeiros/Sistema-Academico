@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.sistemaacademico.dto.AlunoDTO;
 import br.com.sistemaacademico.entity.Aluno;
 import br.com.sistemaacademico.service.AlunoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -24,7 +25,12 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/alunos")
 @RequiredArgsConstructor
 @CrossOrigin("*")
+@Tag(
+	    name = "Alunos",
+	    description = "Operações de gerenciamento de alunos"
+	)
 public class AlunoController {
+	
 	private final AlunoService alunoService;
 	private final ModelMapper mapper;
 	

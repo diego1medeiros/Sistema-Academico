@@ -22,9 +22,9 @@
 
 				<p:toolbarGroup align="right">
 
-					<p:commandButton value="Novo aluno" icon="pi pi-plus" process="@this"
-						action="#{alunoBean.novoAluno}" update=":formAluno:dialogAluno"
-						oncomplete="PF('dlgAluno').show()" />
+					<p:commandButton value="Novo aluno" icon="pi pi-plus"
+						process="@this" action="#{alunoBean.novoAluno}"
+						update=":formAluno:dialogAluno" oncomplete="PF('dlgAluno').show()" />
 
 				</p:toolbarGroup>
 
@@ -101,8 +101,9 @@
 
 					<p:outputLabel for="cpf" value="Cpf" />
 
-					<p:inputMask id="cpf" rows="4" autoResize="false" mask="999.999.999-99"
-						value="#{alunoBean.aluno.cpf}" required="true" validateMask="true"
+					<p:inputMask id="cpf" rows="4" autoResize="false"
+						mask="999.999.999-99" value="#{alunoBean.aluno.cpf}"
+						required="true" validateMask="true"
 						requiredMessage="Informe a cpf." />
 
 				</p:panelGrid>

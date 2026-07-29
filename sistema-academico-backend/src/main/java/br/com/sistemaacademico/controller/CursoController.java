@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import br.com.sistemaacademico.dto.CursoDTO;
 import br.com.sistemaacademico.entity.Curso;
 import br.com.sistemaacademico.service.CursoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 
@@ -27,6 +28,10 @@ import java.util.List;
 @RequestMapping("/cursos")
 @RequiredArgsConstructor
 @CrossOrigin("*")
+@Tag(
+		 name = "Cursos",
+		 description = "Gerenciamento dos cursos"
+		)
 public class CursoController {
 
 	private final CursoService cursoService;

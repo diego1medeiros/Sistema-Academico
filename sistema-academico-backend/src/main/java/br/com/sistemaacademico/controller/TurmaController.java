@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import br.com.sistemaacademico.dto.TurmaDTO;
 import br.com.sistemaacademico.entity.Turma;
 import br.com.sistemaacademico.service.TurmaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -26,6 +27,10 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/turmas")
 @RequiredArgsConstructor
 @CrossOrigin("*")
+@Tag(
+		 name = "Turmas",
+		 description = "Gerenciamento das turmas"
+		)
 public class TurmaController {
 
 	private final TurmaService turmaService;

@@ -13,13 +13,11 @@
 			<p:growl id="growl" showDetail="true" />
 
 			<p:toolbar style="margin-bottom:15px">
-
 				<p:toolbarGroup>
 					<h2>
 						<i class="pi pi-calendar"></i> Cadastro de Turmas
 					</h2>
 				</p:toolbarGroup>
-
 				<p:toolbarGroup align="right">
 
 					<p:commandButton value="Nova Turma" icon="pi pi-plus"
@@ -27,14 +25,11 @@
 						update=":formTurma:dialogTurma" oncomplete="PF('dlgTurma').show()" />
 
 				</p:toolbarGroup>
-
 			</p:toolbar>
 
 			<p:dataTable id="tabela" value="#{turmaBean.turmas}" var="turma"
 				paginator="true" rows="10" stripedRows="true"
 				responsiveLayout="scroll">
-
-
 
 				<p:column headerText="Disciplina">
                     #{turma.disciplinaNome}
@@ -91,32 +86,28 @@
 				<p:panelGrid columns="2" styleClass="ui-fluid">
 
 					<p:outputLabel value="Disciplina" />
+					<p:selectOneMenu id="disciplina"
+						value="#{turmaBean.turma.disciplinaId}" required="true"
+						requiredMessage="Selecione uma disciplina.">
 
-					<p:selectOneMenu value="#{turmaBean.turma.disciplinaId}"
-						required="true">
-
-						<f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+						<f:selectItem itemLabel="Selecione..." itemValue="#{null}"
+							noSelectionOption="true" />
 
 						<f:selectItems value="#{turmaBean.disciplinas}" var="disciplina"
 							itemLabel="#{disciplina.nome}" itemValue="#{disciplina.id}" />
-
 					</p:selectOneMenu>
 
 					<p:outputLabel value="Vagas" />
 
 					<p:inputNumber value="#{turmaBean.turma.vagas}" decimalPlaces="0" />
-
 					<p:outputLabel value="Vagas Disponíveis" />
-
 					<p:inputNumber value="#{turmaBean.turma.vagasDisponiveis}"
 						decimalPlaces="0" />
 
 					<p:outputLabel value="Status" />
 
 					<p:selectOneMenu value="#{turmaBean.turma.status}">
-
 						<f:selectItem itemLabel="Aberta" itemValue="ABERTA" />
-
 						<f:selectItem itemLabel="Fechada" itemValue="FECHADA" />
 						<f:selectItem itemLabel="Cancelada" itemValue="CANCELADA" />
 

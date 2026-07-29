@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import br.com.sistemaacademico.dto.MatriculaResponseDTO;
 import br.com.sistemaacademico.dto.SolicitarMatriculaDTO;
-import br.com.sistemaacademico.entity.Matricula;
 import br.com.sistemaacademico.service.MatriculaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -20,6 +20,10 @@ import java.util.stream.Collectors;
 @RequestMapping("/matriculas")
 @RequiredArgsConstructor
 @CrossOrigin("*")
+@Tag(
+		 name = "Matrículas",
+		 description = "Controle das matrículas acadêmicas"
+		)
 public class MatriculaController {
 
 	private final MatriculaService matriculaService;

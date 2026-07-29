@@ -9,11 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import br.com.sistemaacademico.dto.DisciplinaDTO;
 import br.com.sistemaacademico.entity.Disciplina;
 import br.com.sistemaacademico.service.DisciplinaService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/disciplinas")
 @RequiredArgsConstructor
 @CrossOrigin("*")
+@Tag(
+		 name = "Disciplinas",
+		 description = "Gerenciamento das disciplinas"
+		)
 public class DisciplinaController {
 
 	private final DisciplinaService disciplinaService;
