@@ -174,6 +174,27 @@ Sistema-Academico
 └── README.md
 ```
 
+## 🤖 Uso de Inteligência Artificial
+
+Durante o desenvolvimento deste projeto, ferramentas de Inteligência Artificial foram utilizadas apenas como apoio em atividades específicas, sem substituir o processo de implementação.
+
+### Ferramenta utilizada
+
+- ChatGPT (OpenAI)
+
+### A IA auxiliou em:
+
+- Investigação e resolução de alguns erros (bugs) encontrados durante o desenvolvimento.
+- Revisão e melhoria da documentação do projeto (README).
+- Apoio na elaboração da documentação Javadoc.
+- Orientações sobre testes automatizados utilizando JUnit.
+- Explicações sobre mensagens de erro e exceções do Spring Boot.
+  
+### Revisão manual
+
+Todo o código-fonte, regras de negócio e arquitetura da aplicação foram desenvolvidos e revisados manualmente pelo autor do projeto.
+
+As sugestões fornecidas pela IA foram analisadas, adaptadas e validadas antes de serem aplicadas, garantindo que o comportamento da aplicação atendesse aos requisitos definidos.
 
 # 🐳 Banco de Dados
 
