@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import br.com.sistemaacademico.dto.MatriculaResponseDTO;
 import br.com.sistemaacademico.dto.SolicitarMatriculaDTO;
+import br.com.sistemaacademico.entity.Matricula;
 import br.com.sistemaacademico.service.MatriculaService;
 
 import java.time.format.DateTimeFormatter;
@@ -21,13 +22,19 @@ import java.util.stream.Collectors;
 @CrossOrigin("*")
 public class MatriculaController {
 
-	private final MatriculaService service;
+	private final MatriculaService matriculaService;
 	private final ModelMapper mapper;
 
+	
+	 /**
+     * Retorna todas as matrículas cadastradas.
+     *
+     * @return lista de matrículas
+     */
 	@GetMapping
 	public List<MatriculaResponseDTO> listarMatriculas() {
 
-		return service.listarMatriculas().stream().map(matricula -> {
+		return matriculaService.listarMatriculas().stream().map(matricula -> {
 
 			MatriculaResponseDTO dto = mapper.map(matricula, MatriculaResponseDTO.class);
 			dto.setAlunoNome(matricula.getAluno().getNome());
@@ -43,43 +50,87 @@ public class MatriculaController {
 		}).collect(Collectors.toList());
 	}
 
+	
+	 /**
+     * Realiza uma solicitação de matrícula para um aluno em uma turma.
+     *
+     * @param dto dados da solicitação de matrícula
+     * @return matrícula criada
+     */
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public MatriculaResponseDTO matricular(@RequestBody @Valid SolicitarMatriculaDTO dto) {
-
-		return service.cadastrarMatricular(dto.getAlunoId(), dto.getTurmaId());
+		return matriculaService.cadastrarMatricular(dto.getAlunoId(), dto.getTurmaId());
 
 	}
-
+	 /**
+     * Confirma uma matrícula pendente.
+     *
+     * @param id identificador da matrícula
+     * @return matrícula confirmada
+     */
 	@PutMapping("/{id}/confirmar")
 	public MatriculaResponseDTO confirmarMatricula(@PathVariable("id") Long id) {
-		return service.confirmarMatricula(id);
+		return matriculaService.confirmarMatricula(id);
 	}
 
+	
+	 /**
+     * Cancela uma matrícula.
+     *
+     * @param id identificador da matrícula
+     * @return matrícula cancelada
+     */
 	@PutMapping("/{id}/cancelar")
 	public MatriculaResponseDTO cancelarMatricula(@PathVariable("id") Long id) {
-		return service.cancelarMatricula(id);
+		return matriculaService.cancelarMatricula(id);
 	}
 
+	
+	 /**
+     * Lista as matrículas de um aluno.
+     *
+     * @param id identificador do aluno
+     * @return lista de matrículas do aluno
+     */
 	@GetMapping("/aluno/{id}")
-	public List<MatriculaResponseDTO> listarAluno(@PathVariable("id") Long id) {
-		return service.listarAluno(id);
+	public List<MatriculaResponseDTO>  listarMatriculasPorAluno(@PathVariable("id") Long id) {
+		return matriculaService.listarAluno(id);
 	}
 
+	
+	 /**
+     * Lista as matrículas de uma turma.
+     *
+     * @param id identificador da turma
+     * @return lista de matrículas da turma
+     */
 	@GetMapping("/turma/{id}")
-	public List<MatriculaResponseDTO> listarTurma(@PathVariable("id") Long id) {
-		return service.listarTurma(id);
+	public List<MatriculaResponseDTO> listarMatriculasPorTurma(@PathVariable("id") Long id) {
+		return matriculaService.listarTurma(id);
 	}
 
+	
+	 /**
+     * Retorna a quantidade total de matrículas cadastradas.
+     *
+     * @return total de matrículas
+     */
 	@GetMapping("/count")
 	public Long contarMatriculas() {
-		return service.contarMatriculas();
+		return matriculaService.contarMatriculas();
 
 	}
 	
+	
+	  /**
+     * Retorna as cinco matrículas mais recentes.
+     *
+     * @return lista das últimas matrículas
+     */
 	  @GetMapping("/ultimas")
 	    public List<MatriculaResponseDTO> ultimasMatriculas(){
-	        return service.ultimasMatriculas();
+	        return matriculaService.ultimasMatriculas();
 
 	    }
 }

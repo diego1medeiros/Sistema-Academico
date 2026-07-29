@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import java.util.List;
+
+import org.springframework.aop.framework.adapter.GlobalAdvisorAdapterRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -38,16 +40,37 @@ public class AlunoBean implements Serializable {
 
 	public void salvarAluno() {
 
-		if (aluno.getId() == null) {
-			alunoService.salvarAluno(aluno);
-			MensagemUtils.info("Cadastro", "Aluno cadastrado com sucesso.");
-		} else {
-			alunoService.atualizarAluno(aluno);
-			MensagemUtils.info("Atualizado", "Aluno atualizado com sucesso.");
-		}
-		novoAluno();
-		carregarAlunos();
+	    try {
 
+	        if (aluno.getId() == null) {
+
+	            alunoService.salvarAluno(aluno);
+	            MensagemUtils.info("Cadastro", "Aluno cadastrado com sucesso.");
+
+	        } else {
+
+	            alunoService.atualizarAluno(aluno);
+	            MensagemUtils.info("Atualizado", "Aluno atualizado com sucesso.");
+
+	        }
+
+	        novoAluno();
+	        carregarAlunos();
+
+	    } catch (WebClientResponseException.BadRequest  e) {
+
+	        MensagemUtils.erro(
+	            "Erro",
+	            e.getResponseBodyAsString()
+	        );
+
+	    } catch (Exception e) {
+
+	        MensagemUtils.erro(
+	            "Erro",
+	            "Não foi possível salvar o aluno."
+	        );
+	    }
 	}
 
 	public void excluirAluno(AlunoDTO aluno) {

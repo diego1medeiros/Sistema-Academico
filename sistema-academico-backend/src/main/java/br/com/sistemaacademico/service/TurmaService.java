@@ -11,6 +11,16 @@ import br.com.sistemaacademico.repository.DisciplinaRepository;
 import br.com.sistemaacademico.repository.TurmaRepository;
 import lombok.RequiredArgsConstructor;
 
+
+/**
+ * Serviço responsável pelo gerenciamento das turmas.
+ *
+ * <p>Realiza as operações de cadastro, consulta, atualização e exclusão
+ * de turmas, além de associá-las às disciplinas cadastradas.</p>
+ *
+ * @author Diego Medeiros Jesus
+ * @since 1.0
+ */
 @Service
 @RequiredArgsConstructor
 public class TurmaService {
@@ -18,15 +28,43 @@ public class TurmaService {
     private final TurmaRepository repository;
     private final DisciplinaRepository disciplinaRepository;
 
+    
+    
+    /**
+     * Retorna todas as turmas cadastradas no sistema.
+     *
+     * @return lista de turmas
+     */
     public List<Turma> listarTurma() {
         return repository.findAll();
     }
-
+    
+    
+    /**
+     * Busca uma turma pelo seu identificador.
+     *
+     * @param id identificador da turma
+     * @return turma encontrada
+     * @throws RuntimeException caso a turma não seja encontrada
+     */
+   
     public Turma buscarTurma(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Turma não encontrada."));
     }
-
+    
+    /**
+     * Cadastra uma nova turma ou atualiza uma turma existente.
+     *
+     * <p>Quando o identificador informado no DTO for nulo, uma nova turma
+     * será criada. Caso contrário, a turma existente será atualizada.</p>
+     *
+     * <p>A disciplina informada deve estar previamente cadastrada.</p>
+     *
+     * @param dto dados da turma
+     * @return turma cadastrada ou atualizada
+     * @throws RuntimeException caso a disciplina não seja encontrada
+     */
     public Turma cadastrarTurma(TurmaDTO dto) {
 
         Disciplina disciplina = disciplinaRepository.findById(dto.getDisciplinaId())
@@ -49,11 +87,22 @@ public class TurmaService {
 
     }
 
+    /**
+     * Remove uma turma do sistema.
+     *
+     * @param id identificador da turma
+     */
     public void excluirTurma(Long id) {
         repository.deleteById(id);
     }
 
-	public Long ContarTurmas() {
+    
+    /**
+     * Retorna a quantidade total de turmas cadastradas.
+     *
+     * @return total de turmas
+     */
+	public Long contarTurmas() {
 		return repository.count();
 	}
 

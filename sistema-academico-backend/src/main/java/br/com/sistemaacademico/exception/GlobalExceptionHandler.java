@@ -8,6 +8,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+	
+	 /**
+     * Trata exceções de regra de negócio.
+     *
+     * @param e exceção lançada
+     * @return resposta padronizada
+     */
+	
     @ExceptionHandler(RegraNegocioException.class)
     public ResponseEntity<String> regraNegocio(RegraNegocioException e) {
         return ResponseEntity
@@ -15,6 +23,13 @@ public class GlobalExceptionHandler {
                 .body(e.getMessage());
     }
 
+    
+    /**
+     * Trata exceções de execução.
+     *
+     * @param e exceção lançada
+     * @return resposta padronizada
+     */
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> runtime(RuntimeException e) {
         return ResponseEntity

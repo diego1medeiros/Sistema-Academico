@@ -12,49 +12,95 @@ import br.com.sistemaacademico.service.CursoService;
 
 import java.util.List;
 
+/**
+ * Controlador responsável pelo gerenciamento dos cursos.
+ *
+ * <p>
+ * Disponibiliza os endpoints para cadastro, consulta, atualização, exclusão e
+ * listagem de cursos do sistema acadêmico.
+ * </p>
+ *
+ * @author Diego Medeiros Jesus
+ * @since 1.0
+ */
 @RestController
 @RequestMapping("/cursos")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class CursoController {
 
-	private final CursoService service;
+	private final CursoService cursoService;
 	private final ModelMapper mapper;
 
+	/**
+	 * Retorna todos os cursos cadastrados.
+	 *
+	 * @return lista de cursos
+	 */
 	@GetMapping
-	public List<Curso> listaruros() {
-		return service.listarCursos();
+	public List<CursoDTO> listarCursos() {
+		return cursoService.listarCursos().stream().map(curso -> mapper.map(curso, CursoDTO.class)).toList();
 	}
 
+	/**
+	 * Busca um curso pelo seu identificador.
+	 *
+	 * @param id identificador do curso
+	 * @return curso encontrado
+	 */
 	@GetMapping("/{id}")
-	public Curso buscarCurso(@PathVariable("id") Long id) {
-		return service.buscarCurso(id);
-	}
+	public CursoDTO buscarCurso(@PathVariable("id") Long id) {
+		 Curso curso = cursoService.buscarCurso(id);
+		    return mapper.map(curso, CursoDTO.class);	}
 
+	/**
+	 * Cadastra um novo curso.
+	 *
+	 * @param dto dados do curso
+	 * @return curso cadastrado
+	 */
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public CursoDTO cadastrarCurso(@RequestBody @Valid CursoDTO dto) {
 		Curso curso = mapper.map(dto, Curso.class);
-		return mapper.map(service.cadastrarCurso(curso), CursoDTO.class);
+		return mapper.map(cursoService.cadastrarCurso(curso), CursoDTO.class);
 
 	}
 
+	/**
+	 * Atualiza os dados de um curso existente.
+	 *
+	 * @param id  identificador do curso
+	 * @param dto novos dados do curso
+	 * @return curso atualizado
+	 */
 	@PutMapping("/{id}")
-	public CursoDTO atualizarCurso(@PathVariable ("id")Long id, @RequestBody CursoDTO dto) {
+	public CursoDTO atualizarCurso(@PathVariable("id") Long id, @RequestBody CursoDTO dto) {
 		Curso curso = mapper.map(dto, Curso.class);
-		return mapper.map(service.atualizarCurso(id, curso), CursoDTO.class);
+		return mapper.map(cursoService.atualizarCurso(id, curso), CursoDTO.class);
 
 	}
 
+	/**
+	 * Remove um curso do sistema.
+	 *
+	 * @param id identificador do curso
+	 */
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void excluirCurso(@PathVariable ("id")Long id) {
-		service.excluirCurso(id);
+	public void excluirCurso(@PathVariable("id") Long id) {
+		cursoService.excluirCurso(id);
 
 	}
-	
-	 @GetMapping("/count")
-	    public Long contarCursos(){
-	        return service.contarCursos();
 
-}}
+	/**
+	 * Retorna a quantidade total de cursos cadastradas.
+	 *
+	 * @return total de cursos
+	 */
+	@GetMapping("/count")
+	public Long contarCursos() {
+		return cursoService.contarCursos();
+
+	}
+}

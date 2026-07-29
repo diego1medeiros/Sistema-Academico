@@ -16,13 +16,17 @@ import br.com.sistemaacademico.service.DisciplinaService;
 @CrossOrigin("*")
 public class DisciplinaController {
 
-	private final DisciplinaService service;
-
+	private final DisciplinaService disciplinaService;
 	private final ModelMapper mapper;
 
+	/**
+	 * Retorna todas as disciplinas cadastradas.
+	 *
+	 * @return lista de disciplinas
+	 */
 	@GetMapping
 	public List<DisciplinaDTO> listarDisciplinas() {
-		return service.listarDisciplinas().stream().map(disciplina -> {
+		return disciplinaService.listarDisciplinas().stream().map(disciplina -> {
 			DisciplinaDTO dto = mapper.map(disciplina, DisciplinaDTO.class);
 			dto.setCursoId(disciplina.getCurso().getId());
 			dto.setCursoNome(disciplina.getCurso().getNome());
@@ -32,43 +36,66 @@ public class DisciplinaController {
 
 	}
 
+	/**
+	 * Busca uma disciplina pelo identificador.
+	 *
+	 * @param id identificador da disciplina
+	 * @return disciplina encontrada
+	 */
 	@GetMapping("/{id}")
 	public DisciplinaDTO buscarDisciplina(@PathVariable("id") Long id) {
-		Disciplina disciplina = service.buscarDisciplina(id);
+		Disciplina disciplina = disciplinaService.buscarDisciplina(id);
 
-		DisciplinaDTO dto = mapper.map(disciplina, DisciplinaDTO.class);
-		dto.setCursoId(disciplina.getCurso().getId());
-		dto.setCursoNome(disciplina.getCurso().getNome());
+		DisciplinaDTO disciplinaDTO = mapper.map(disciplina, DisciplinaDTO.class);
+		disciplinaDTO.setCursoId(disciplina.getCurso().getId());
+		disciplinaDTO.setCursoNome(disciplina.getCurso().getNome());
 
-		return dto;
+		return disciplinaDTO;
 	}
 
+	/**
+	 * Cadastra uma nova disciplina.
+	 *
+	 * @param dto dados da disciplina
+	 * @return disciplina cadastrada
+	 */
 	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
 	public DisciplinaDTO cadastrarDisciplina(@RequestBody @Valid DisciplinaDTO dto) {
-		Disciplina disciplina = service.cadastrarDisciplina(dto);
-		DisciplinaDTO retorno = mapper.map(disciplina, DisciplinaDTO.class);
-		retorno.setCursoId(disciplina.getCurso().getId());
+		Disciplina disciplina = disciplinaService.cadastrarDisciplina(dto);
+		DisciplinaDTO disciplinaDTO = mapper.map(disciplina, DisciplinaDTO.class);
+		disciplinaDTO.setCursoId(disciplina.getCurso().getId());
 
-		return retorno;
+		return disciplinaDTO;
 	}
 
+	/**
+	 * Atualiza os dados de uma disciplina.
+	 *
+	 * @param id  identificador da disciplina
+	 * @param dto novos dados da disciplina
+	 * @return disciplina atualizada
+	 */
 	@PutMapping("/{id}")
 	public DisciplinaDTO atualizarDisciplina(@PathVariable("id") Long id, @RequestBody @Valid DisciplinaDTO dto) {
 
 		dto.setId(id);
+		Disciplina disciplina = disciplinaService.atualizarDisciplina(dto);
+		DisciplinaDTO disciplinaDTO = mapper.map(disciplina, DisciplinaDTO.class);
+		disciplinaDTO.setCursoId(disciplina.getCurso().getId());
 
-		Disciplina disciplina = service.cadastrarDisciplina(dto);
-
-		DisciplinaDTO retorno = mapper.map(disciplina, DisciplinaDTO.class);
-		retorno.setCursoId(disciplina.getCurso().getId());
-
-		return retorno;
+		return disciplinaDTO;
 	}
 
+	/**
+	 * Exclui uma disciplina pelo identificador.
+	 *
+	 * @param id identificador da disciplina
+	 */
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluirDisciplina(@PathVariable("id") Long id) {
-		service.excluirDisciplina(id);
+		disciplinaService.excluirDisciplina(id);
 	}
 
 }
