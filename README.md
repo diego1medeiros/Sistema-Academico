@@ -160,18 +160,32 @@ Sistema-Academico
 
 ---
 
-# 📂 Estrutura do Projeto
+## 📂 Estrutura do Projeto
 
-```
+```text
 Sistema-Academico
 │
-├── sistema-academico-backend
+├── .github/
+│   └── workflows/          
+│        └── frontend.yml    # GitHub Actions
+│        └── backend.yml 
+│           
+├── docs/
+│   └── imagens/            # Capturas de tela do README
 │
-├── sistema-academico-frontend
+├── sistema-academico-backend/
+│   ├── src/
+│   ├── pom.xml
+│   
+│
+├── sistema-academico-frontend/
+│   ├── src/
+│   ├── pom.xml
+│   
 │
 ├── docker-compose.yml
-│
 └── README.md
+```
 ```
 
 ## 🤖 Uso de Inteligência Artificial
