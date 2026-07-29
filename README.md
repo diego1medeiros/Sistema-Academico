@@ -9,9 +9,9 @@
 ![Maven](https://img.shields.io/badge/Maven-3.9-C71A36?logo=apachemaven)
 
 
-Sistema de Gestão Acadêmica desenvolvido para demonstrar conhecimentos em Java, Spring Boot, JSF, PrimeFaces, PostgreSQL e Docker.
+Sistema de Gestão Acadêmica desenvolvido como projeto de portfólio para demonstrar conhecimentos em desenvolvimento backend e frontend Java utilizando Spring Boot, JSF, PrimeFaces, PostgreSQL, Docker e arquitetura baseada em APIs REST.
 
-A aplicação permite o gerenciamento de alunos, cursos, disciplinas, turmas e matrículas, aplicando regras de negócio como controle de vagas, confirmação e cancelamento de matrículas.
+A aplicação permite o gerenciamento completo de alunos, cursos, disciplinas, turmas e matrículas, implementando regras de negócio como controle de vagas, confirmação de matrículas e validações de integridade dos dados.
 ---
 ## 📑 Sumário
 
@@ -48,6 +48,19 @@ O Sistema Acadêmico permite o gerenciamento de:
 - 📝 Matrículas
 
 O projeto foi desenvolvido utilizando arquitetura cliente-servidor, com backend em Spring Boot e frontend em JSF + PrimeFaces.
+
+## ✨ Destaques
+
+- Arquitetura Cliente-Servidor
+- Backend REST desenvolvido com Spring Boot
+- Frontend JSF + PrimeFaces
+- Persistência com Spring Data JPA e PostgreSQL
+- Controle de versão do banco com Flyway
+- Docker Compose para ambiente de desenvolvimento
+- Dashboard com indicadores do sistema
+- Documentação da API com Swagger/OpenAPI
+
+
 
 # 🎥 Demonstração do Sistema
 
@@ -116,35 +129,18 @@ Sistema-Academico
 
 # 🚀 Tecnologias
 
-## Backend
-
-- Java 17
-- Spring Boot
-- Spring MVC
-- Spring Data JPA
-- Hibernate
-- Flyway
-- PostgreSQL
-- Maven
-- Swagger/OpenAPI
-
-
-## Frontend
-
-- Java 17
-- JSF
-- PrimeFaces
-- CDI
-- Maven
-
-
-## DevOps
-
-- Git
-- GitHub
-- GitHub Actions
-- Docker
-- Docker Compose
+| Categoria | Tecnologias |
+|-----------|-------------|
+| Linguagem | Java 17 |
+| Backend | Spring Boot, Spring MVC |
+| Persistência | Spring Data JPA, Hibernate |
+| Banco | PostgreSQL |
+| Migrações | Flyway |
+| Frontend | JSF, PrimeFaces |
+| Documentação | Swagger/OpenAPI |
+| Build | Maven |
+| Containerização | Docker, Docker Compose |
+| Versionamento | Git, GitHub |
 
 ---
 
@@ -177,8 +173,6 @@ Sistema-Academico
 │
 └── README.md
 ```
-
-
 
 
 # 🐳 Banco de Dados
@@ -372,39 +366,46 @@ Recurso Método Endpoint Descrição
 
 
 
+## 📝 Fluxo de Matrícula
 
-
-## 📝 Teste Manual do Fluxo de Matrícula
-
-Fluxo esperado:
-
-Cadastrar um curso.
-Cadastrar uma disciplina vinculada ao curso.
-Criar uma turma informando quantidade máxima de vagas.
-Cadastrar um aluno.
-Realizar matrícula do aluno na turma.
+1. Cadastrar um curso.
+2. Cadastrar uma disciplina vinculada ao curso.
+3. Criar uma turma informando o limite de vagas.
+4. Cadastrar um aluno.
+5. Solicitar a matrícula.
+6. Confirmar a matrícula.
 
 Resultado esperado:
 
-Matrícula criada com sucesso.
-Aluno associado à turma.
-Quantidade de vagas atualizada.
+- Matrícula criada.
+- Aluno vinculado à turma.
+- Vagas disponíveis atualizadas.
+
+## 📌 Principais Regras de Negócio
+
+- Um aluno não pode ser matriculado duas vezes na mesma turma.
+- Apenas turmas com status **ABERTA** aceitam matrículas.
+- Matrículas confirmadas reduzem a quantidade de vagas disponíveis.
+- O cancelamento de uma matrícula confirmada devolve a vaga à turma.
+- Não é permitido excluir alunos com matrículas ativas.
+- Cursos e disciplinas seguem relacionamento hierárquico.
+
 
 ## 🎯 Regra de Limite de Vagas
 
-Cada turma possui um limite máximo de alunos.
+Cada turma possui um número máximo de vagas.
 
 Exemplo:
 
-Turma:
-Limite: 5 alunos
+- Limite da turma: **5 alunos**
+- Matrículas confirmadas: **5**
 
-Ao tentar cadastrar o aluno número 6:
+Ao tentar confirmar a matrícula do sexto aluno:
 
-Resultado esperado:
+- ❌ A matrícula é bloqueada.
+- ❌ O sistema retorna a mensagem:
 
-Sistema bloqueia a matrícula.
-Retorna mensagem informando que não existem vagas disponíveis.
+> Não há vagas disponíveis.
 
 ## 💡 Decisões de Implementação
 
@@ -423,19 +424,52 @@ Algumas decisões tomadas:
 - Testes automatizados ainda estão em evolução.
 - Sistema preparado inicialmente para ambiente acadêmico de pequeno porte.
 
-## Projeto em desenvolvimento.
+## 🚧 Status do Projeto
+
+| Funcionalidade | Status |
+|---------------|--------|
+| Backend REST | ✅ |
+| Frontend JSF | ✅ |
+| Dashboard | ✅ |
+| Docker | ✅ |
+| Swagger | ✅ |
+| Flyway | ✅ |
+| CRUD Completo | ✅ |
+| Testes Automatizados | 🔄 |
+| Spring Security | 🔄 |
+| Deploy | 🔄 |
 
 ---
 
 ## 👨‍💻 Desenvolvedor
 
-Diego Medeiros Jesus
+**Diego Medeiros Jesus**
 
 Desenvolvedor Java Backend / Full Stack
 
-GitHub:
-https://github.com/diego1medeiros
+- GitHub: https://github.com/diego1medeiros
+- LinkedIn: (adicione o link do seu perfil)
 
 ## 📄 Licença
 
 Este projeto foi desenvolvido para fins acadêmicos e demonstração de conhecimentos em Java, Spring Boot, JSF e PostgreSQL.
+
+---
+
+## 📚 Aprendizados
+
+Durante o desenvolvimento deste projeto foram aplicados conceitos como:
+
+- Arquitetura Cliente-Servidor
+- APIs REST
+- DTOs
+- ModelMapper
+- Spring Data JPA
+- Regras de Negócio
+- Flyway
+- Docker
+- WebClient
+- JSF + PrimeFaces
+- Organização em camadas
+
+⭐ Se este projeto foi útil para você, deixe uma estrela no repositório!
