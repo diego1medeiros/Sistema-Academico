@@ -300,11 +300,11 @@ A API REST do Sistema Acadêmico possui documentação interativa utilizando Swa
 
 A documentação permite visualizar e testar os endpoints diretamente pelo navegador.
 
-Acesse:[ http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+Acesse a documentação interativa da API em:
+
+http://localhost:8080/swagger-ui/index.html
 
 ## 🔗 Principais Endpoints
-
-Recurso Método Endpoint Descrição
 
 | Recurso | Método | Endpoint | Descrição |
 |---------|---------|----------|-----------|
@@ -438,6 +438,16 @@ Algumas decisões tomadas:
 | Testes Automatizados | 🔄 |
 | Spring Security | 🔄 |
 | Deploy | 🔄 |
+
+## 🚀 Próximas Evoluções
+
+- Spring Security + JWT
+- Testes unitários (JUnit e Mockito)
+- Testes de integração
+- Deploy em nuvem
+- Pipeline CI/CD
+- Observabilidade (Actuator)
+
 
 ---
 
