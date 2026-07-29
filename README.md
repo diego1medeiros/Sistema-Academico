@@ -26,10 +26,18 @@ O Sistema Acadêmico permite o gerenciamento de:
 
 O projeto foi desenvolvido utilizando arquitetura cliente-servidor, com backend em Spring Boot e frontend em JSF + PrimeFaces.
 
+## 🎥 Demonstração do Sistema
+
+▶️ Assista ao vídeo de demonstração:
+
+[![Demonstração do Sistema](docs/imagens/dashboard.png)]([https://youtu.be/SEU_VIDEO](https://youtu.be/YMNpoA6yGKg))
+
 ---
 
 ## 🏗 Arquitetura
 
+O projeto foi dividido em frontend e backend,
+utilizando comunicação REST através de WebClient.
 ```
 Sistema-Academico
 │
@@ -45,11 +53,6 @@ Sistema-Academico
       ├── PrimeFaces
       └── Consome a API REST
 ```
-
-## 🏗 Arquitetura
-
-O projeto foi dividido em frontend e backend,
-utilizando comunicação REST através de WebClient.
 
 ## 🏗 Diagrama de Arquitetura
                  
@@ -245,6 +248,16 @@ mvn spring-boot:run
 Frontend:
 
 http://localhost:8081
+
+## 📚 Documentação Técnica
+
+O projeto possui documentação Javadoc dos principais componentes:
+
+- Controllers REST
+- Services
+- Beans JSF
+- Integrações WebClient
+- Regras de negócio de matrícula
 
 
 ## 📖 Documentação da API
