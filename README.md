@@ -46,6 +46,11 @@ Sistema-Academico
       └── Consome a API REST
 ```
 
+## 🏗 Arquitetura
+
+O projeto foi dividido em frontend e backend,
+utilizando comunicação REST através de WebClient.
+
 ## 🏗 Diagrama de Arquitetura
                  
                  Usuário
