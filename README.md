@@ -62,11 +62,11 @@ O projeto foi desenvolvido utilizando arquitetura cliente-servidor, com backend 
 
 
 
-# 🎥 Demonstração do Sistema
+## 🎥 Demonstração do Sistema
 
 Assista à demonstração completa do Sistema Acadêmico no YouTube:
 
-▶️ https://youtu.be/YMNpoA6yGKg
+▶️ https://www.youtube.com/watch?v=deqnvNc9f2Q
 
 Ou clique na imagem abaixo:
 
