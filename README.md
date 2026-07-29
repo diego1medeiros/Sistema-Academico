@@ -70,7 +70,7 @@ Assista à demonstração completa do Sistema Acadêmico no YouTube:
 
 Ou clique na imagem abaixo:
 
-[![Sistema Acadêmico](docs/imagens/dashboard.png)](https://youtu.be/YMNpoA6yGKg)
+[![Sistema Acadêmico](docs/imagens/dashboard.png)](https://www.youtube.com/watch?v=deqnvNc9f2Q)
 
 ---
 
