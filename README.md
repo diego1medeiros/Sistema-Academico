@@ -26,11 +26,15 @@ O Sistema Acadêmico permite o gerenciamento de:
 
 O projeto foi desenvolvido utilizando arquitetura cliente-servidor, com backend em Spring Boot e frontend em JSF + PrimeFaces.
 
-## 🎥 Demonstração do Sistema
+# 🎥 Demonstração do Sistema
 
-▶️ Assista ao vídeo de demonstração:
+Assista à demonstração completa do Sistema Acadêmico no YouTube:
 
-[![Demonstração do Sistema](docs/imagens/dashboard.png)]([https://youtu.be/SEU_VIDEO](https://youtu.be/YMNpoA6yGKg))
+▶️ https://youtu.be/YMNpoA6yGKg
+
+Ou clique na imagem abaixo:
+
+[![Sistema Acadêmico](docs/imagens/dashboard.png)](https://youtu.be/YMNpoA6yGKg)
 
 ---
 
