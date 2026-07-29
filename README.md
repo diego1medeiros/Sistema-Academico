@@ -249,30 +249,43 @@ Na raiz do projeto:
 
 docker compose up -d
 
-Executar Backend
+### 1. Clonar o projeto
 
-Acesse:
+```bash
+git clone https://github.com/diego1medeiros/Sistema-Academico.git
+```
 
+### 2. Acessar o projeto
+
+```bash
+cd Sistema-Academico
+```
+
+### 3. Subir o banco
+
+```bash
+docker compose up -d
+```
+
+### 4. Executar o Backend
+
+```bash
 cd sistema-academico-backend
-Execute:
-
 mvn spring-boot:run
+```
 
-Backend:
+A API ficará disponível em:
 
 http://localhost:8080
 
-Executar Frontend
+### 5. Executar o Frontend
 
-Acesse:
-
+```bash
 cd sistema-academico-frontend
-
-Execute:
-
 mvn spring-boot:run
+```
 
-Frontend:
+O sistema ficará disponível em:
 
 http://localhost:8081
 
