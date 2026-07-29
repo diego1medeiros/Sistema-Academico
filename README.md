@@ -479,7 +479,7 @@ Algumas decisões tomadas:
 Desenvolvedor Java Backend / Full Stack
 
 - GitHub: https://github.com/diego1medeiros
-- LinkedIn: (adicione o link do seu perfil)
+- LinkedIn: www.linkedin.com/in/diego-medeiros-jesus-50746717a
 
 ## 📄 Licença
 
