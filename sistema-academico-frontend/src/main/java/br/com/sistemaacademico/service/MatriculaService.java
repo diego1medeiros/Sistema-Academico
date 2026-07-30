@@ -1,11 +1,12 @@
 package br.com.sistemaacademico.service;
 
 import java.util.List;
-
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import br.com.sistemaacademico.dto.MatriculaResponseDTO;
 import br.com.sistemaacademico.dto.SolicitarMatriculaDTO;
+import br.com.sistemaacademico.exception.RegraNegocioException;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -51,16 +52,28 @@ public class MatriculaService {
 	 * @throws RegraNegocioException caso a turma esteja fechada, sem vagas ou o
 	 *                               aluno já esteja matriculado
 	 */
+	
+
 	public MatriculaResponseDTO matricularAluno(Long alunoId, Long turmaId) {
 
-		SolicitarMatriculaDTO dto = new SolicitarMatriculaDTO();
-		dto.setAlunoId(alunoId);
-		dto.setTurmaId(turmaId);
+	    SolicitarMatriculaDTO dto = new SolicitarMatriculaDTO();
+	    dto.setAlunoId(alunoId);
+	    dto.setTurmaId(turmaId);
 
-		return webClient.post().uri("/matriculas").bodyValue(dto).retrieve().bodyToMono(MatriculaResponseDTO.class)
-				.block();
+	    try {
+	        return webClient.post()
+	                .uri("/matriculas")
+	                .bodyValue(dto)
+	                .retrieve()
+	                .bodyToMono(MatriculaResponseDTO.class)
+	                .block();
 
+	    } catch (WebClientResponseException e) {
+	        throw new RegraNegocioException(e.getResponseBodyAsString());
+	    }
 	}
+
+	
 
 	/**
 	 * Confirma uma matrícula pendente.

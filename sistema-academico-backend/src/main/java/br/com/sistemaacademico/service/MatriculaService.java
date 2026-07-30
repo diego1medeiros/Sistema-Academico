@@ -74,7 +74,9 @@ public class MatriculaService {
 		Aluno aluno = alunoRepository.findById(alunoId).orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
 		Turma turma = turmaRepository.findById(turmaId).orElseThrow(() -> new RuntimeException("Turma não encontrada"));
 
+		
 		if (turma.getStatus() != StatusTurma.ABERTA) {
+			 
 			throw new RegraNegocioException("Turma não está aberta");
 		}
 		if (turma.getVagasDisponiveis() <= 0) {

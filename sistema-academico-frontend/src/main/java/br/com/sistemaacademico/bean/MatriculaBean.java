@@ -11,6 +11,7 @@ import br.com.sistemaacademico.dto.MatriculaDTO;
 import br.com.sistemaacademico.dto.MatriculaResponseDTO;
 import br.com.sistemaacademico.dto.TurmaDTO;
 import br.com.sistemaacademico.exception.MensagemUtils;
+import br.com.sistemaacademico.exception.RegraNegocioException;
 import br.com.sistemaacademico.service.AlunoService;
 import br.com.sistemaacademico.service.MatriculaService;
 import br.com.sistemaacademico.service.TurmaService;
@@ -118,13 +119,16 @@ public class MatriculaBean implements Serializable {
 		}
 		try {
 			matriculaService.matricularAluno(alunoId, turmaId);
-			MensagemUtils.info("Sucesso", "Aluno matriculado com sucesso!");
+			MensagemUtils.info("Sucesso","Aluno Matriculado com sucesso");
 			limparConsulta();
-			carregarMatriculas();
+			carregarMatriculas();}
 
-		} catch (Exception e) {
-			MensagemUtils.erro("Erro", "Aluno já matriculado nesta turma");
-		}
+			catch (RegraNegocioException e) {
+			    MensagemUtils.erro("Erro", e.getMessage());
+
+			} catch (Exception e) {
+			    MensagemUtils.erro("Erro", e.getMessage());
+			}
 	}
 
 	/**
