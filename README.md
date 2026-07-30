@@ -469,6 +469,7 @@ Algumas decisões tomadas:
 | Docker | ✅ |
 | Swagger | ✅ |
 | Flyway | ✅ |
+| Testes unitários | ✅ |
 | CRUD Completo | ✅ |
 | Testes Automatizados | 🔄 |
 | Spring Security | 🔄 |
@@ -477,7 +478,6 @@ Algumas decisões tomadas:
 ## 🚀 Próximas Evoluções
 
 - Spring Security + JWT
-- Testes unitários (JUnit e Mockito)
 - Testes de integração
 - Deploy em nuvem
 - Pipeline CI/CD
