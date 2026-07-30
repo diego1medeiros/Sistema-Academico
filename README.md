@@ -218,9 +218,9 @@ As sugestões fornecidas pela IA foram analisadas, adaptadas e validadas antes d
 O projeto utiliza **PostgreSQL 16**.
 
 Existem duas formas de configurar o banco de dados:
-
+```
 ## Opção 1 - Docker (Recomendado)
-
+```
 Suba o banco utilizando o Docker Compose:
 
 docker compose up -d
