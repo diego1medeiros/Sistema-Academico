@@ -211,7 +211,8 @@ Todo o código-fonte, regras de negócio e arquitetura da aplicação foram dese
 As sugestões fornecidas pela IA foram analisadas, adaptadas e validadas antes de serem aplicadas, garantindo que o comportamento da aplicação atendesse aos requisitos definidos.
 
 
-
+```
+```
 # 🐳 Banco de Dados
 
 O projeto utiliza **PostgreSQL 16**.
