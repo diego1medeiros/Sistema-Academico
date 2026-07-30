@@ -234,7 +234,6 @@ Serviços disponíveis:
 
 Configuração do banco:
 
-```
 Banco: matricula
 Usuário: postgres
 Senha: 1234
