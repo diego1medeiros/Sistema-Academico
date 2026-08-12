@@ -499,14 +499,27 @@ http://localhost:8080/swagger-ui/index.html
 
 ## 📸 Capturas de Tela
 
-### Dashboard
 
+
+### Login
+![login](docs/imagens/login.png)
+![login](docs/imagens/login1.png)
+
+---
+
+### Usuario
+![login](docs/imagens/usuario.png)
+
+---
+
+### Dashboard
+![Dashboard](docs/imagens/dashboard5.png)
 ![Dashboard](docs/imagens/dashboard.png)
 
 ---
 
 ### Cadastro de Alunos
-
+![Cadastro de Alunos](docs/imagens/aluno5.png)
 ![Cadastro de Alunos](docs/imagens/alunos.png)
 ![Cadastro de Alunos](docs/imagens/alunos1.png)
 ![Cadastro de Alunos](docs/imagens/alunos2.png)
