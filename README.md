@@ -278,6 +278,32 @@ Atualmente são utilizados os perfis:
 ADMIN
 FUNCIONARIO
 
+📍 Busca de CEP
+
+O cadastro de alunos possui integração para consulta automática de endereço através do CEP.
+
+Ao informar um CEP válido, o sistema consulta os dados e preenche automaticamente:
+
+🏠 Rua
+🏘️ Bairro
+🌆 Cidade
+🗺️ Estado
+
+Exemplo:
+
+CEP: 27XXX-XXX
+
+        ↓
+
+Rua
+Bairro
+Cidade
+Estado
+
+Isso reduz a necessidade de preenchimento manual do endereço e melhora a experiência do usuário.
+
+
+
 ## 📂 Estrutura do Projeto
 
 
