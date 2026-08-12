@@ -308,7 +308,7 @@ CEP: 27XXX-XXX
 ## 📂 Estrutura do Projeto
 
 
-
+```text
 Sistema-Academico
 │
 ├── .github/
@@ -332,7 +332,7 @@ Sistema-Academico
 ├── docker-compose.yml
 └── README.md
 
-
+```
 
 ## 🤖 Uso de Inteligência Artificial
 
