@@ -686,26 +686,26 @@ APIs REST
 
 Durante o desenvolvimento deste projeto foram aplicados conceitos como:
 
-Arquitetura Cliente-Servidor
-APIs REST
-DTOs
-ModelMapper
-Spring Boot
-Spring Data JPA
-Hibernate
-Regras de negócio
-Flyway
-PostgreSQL
-Docker
-WebClient
-JSF
-PrimeFaces
-PhaseListener
-Sessão HTTP
-Integração com serviços externos
-Validação de dados
-Controle de vagas
-Git e GitHub
-GitHub Actions
+- Arquitetura Cliente-Servidor
+- APIs REST
+- DTOs
+- ModelMapper
+- Spring Boot
+- Spring Data JPA
+- Hibernate
+- Regras de negócio
+- Flyway
+- PostgreSQL
+- Docker
+- WebClient
+- JSF
+- PrimeFaces
+- PhaseListener
+- Sessão HTTP
+- Integração com serviços externos
+- Validação de dados
+- Controle de vagas
+- Git e GitHub
+- GitHub Actions
 
 ⭐ Se este projeto foi útil para você, deixe uma estrela no repositório!
