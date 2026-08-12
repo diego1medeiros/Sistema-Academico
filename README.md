@@ -9,9 +9,11 @@
 ![Maven](https://img.shields.io/badge/Maven-3.9-C71A36?logo=apachemaven)
 
 
-Sistema de Gestão Acadêmica desenvolvido como projeto de portfólio para demonstrar conhecimentos em desenvolvimento backend e frontend Java utilizando Spring Boot, JSF, PrimeFaces, PostgreSQL, Docker e arquitetura baseada em APIs REST.
+🎓 Sistema Acadêmico
 
-A aplicação permite o gerenciamento completo de alunos, cursos, disciplinas, turmas e matrículas, implementando regras de negócio como controle de vagas, confirmação de matrículas e validações de integridade dos dados.
+Sistema de Gestão Acadêmica desenvolvido como projeto de portfólio para demonstrar conhecimentos em desenvolvimento Backend e Full Stack Java utilizando Spring Boot, JSF, PrimeFaces, PostgreSQL, Docker e arquitetura baseada em APIs REST.
+
+A aplicação permite o gerenciamento de alunos, cursos, disciplinas, turmas e matrículas, implementando regras de negócio como controle de vagas, confirmação de matrículas, validações de integridade, autenticação de usuários e controle de acesso às páginas do sistema.
 ---
 ## 📑 Sumário
 
@@ -46,20 +48,38 @@ O Sistema Acadêmico permite o gerenciamento de:
 - 📘 Disciplinas
 - 🏫 Turmas
 - 📝 Matrículas
+- 👤 Usuários
 
-O projeto foi desenvolvido utilizando arquitetura cliente-servidor, com backend em Spring Boot e frontend em JSF + PrimeFaces.
+O projeto foi desenvolvido utilizando uma arquitetura **cliente-servidor**, com:
 
-## ✨ Destaques
+- Backend desenvolvido em Spring Boot
+- Frontend desenvolvido em JSF + PrimeFaces
+- Comunicação entre frontend e backend através de APIs REST
+- Persistência utilizando Spring Data JPA
+- Banco de dados PostgreSQL
+
+---
+
+# ✨ Destaques
 
 - Arquitetura Cliente-Servidor
-- Backend REST desenvolvido com Spring Boot
+- Backend REST com Spring Boot
 - Frontend JSF + PrimeFaces
-- Persistência com Spring Data JPA e PostgreSQL
-- Controle de versão do banco com Flyway
-- Docker Compose para ambiente de desenvolvimento
-- Dashboard com indicadores do sistema
-- Documentação da API com Swagger/OpenAPI
+- Persistência com Spring Data JPA
+- PostgreSQL
+- Flyway para versionamento do banco
+- Docker Compose
+- Dashboard acadêmico
+- Swagger/OpenAPI
+- Cadastro e gerenciamento de usuários
+- Tela de login
+- Controle de acesso às páginas
+- Controle de perfis de usuário
+- Busca automática de endereço através do CEP
+- Controle de vagas em turmas
+- Regras de negócio para matrículas
 
+---
 
 
 ## 🎥 Demonstração do Sistema
@@ -146,17 +166,50 @@ Sistema-Academico
 
 # 📋 Funcionalidades
 
-✅ Cadastro de alunos
+👨‍🎓 Alunos
+Cadastro de alunos
+Edição de alunos
+Exclusão de alunos
+Listagem de alunos
+Validação de campos obrigatórios
+Cadastro de endereço
+Busca automática de endereço através do CEP
 
-✅ Cadastro de cursos
+📚 Cursos
+Cadastro de cursos
+Edição de cursos
+Exclusão de cursos
+Listagem de cursos
 
-✅ Cadastro de disciplinas
+📘 Disciplinas
+Cadastro de disciplinas
+Associação com cursos
+Edição
+Exclusão
+Listagem
 
-✅ Cadastro de turmas
+🏫 Turmas
+Cadastro de turmas
+Associação com disciplinas
+Definição de quantidade de vagas
+Controle de vagas disponíveis
+Controle de status da turma
+Ativação/desativação da turma
 
-✅ Controle de matrículas
+📝 Matrículas
+Solicitação de matrícula
+Consulta de matrículas
+Confirmação de matrícula
+Cancelamento de matrícula
+Controle de vagas
+Validação para evitar matrícula duplicada
 
-✅ Dashboard acadêmico
+👤 Usuários
+Cadastro de usuários
+Exclusão de usuários
+Login
+Logout
+Controle de perfil
 
 ---
 
