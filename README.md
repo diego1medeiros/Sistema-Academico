@@ -220,6 +220,64 @@ Sistema-Academico
 - ✅ Autorizador utilizando `PhaseListener`
 - 🔄 Autenticação com JWT — planejado
 
+
+## 🔐 Autenticação e Controle de Acesso
+
+O sistema possui atualmente uma **tela de login** para controlar o acesso às páginas internas da aplicação.
+
+### 🔑 Login
+
+O usuário realiza a autenticação informando:
+
+- **Login**
+- **Senha**
+
+Após a autenticação, as informações do usuário são armazenadas na **sessão HTTP**.
+
+Exemplo:
+
+```java
+sessionMap.put("NOME", response.getNome());
+sessionMap.put("LOGIN", response.getLogin());
+sessionMap.put("PERFIL", response.getPerfil());
+
+🛡️ Autorizador
+
+Foi implementado um PhaseListener chamado Autorizador.
+
+Sua função é verificar se existe um usuário autenticado na sessão antes de permitir o acesso às páginas protegidas.
+
+Usuário acessa uma página
+          │
+          ▼
+     Autorizador
+          │
+          ▼
+Existe usuário na sessão?
+       /       \
+     SIM       NÃO
+      │         │
+      ▼         ▼
+  Permite     Redireciona
+   acesso      para Login
+
+A página de login permanece pública:
+
+/pages/login.xhtml
+
+As demais páginas do sistema são protegidas pelo Autorizador.
+
+👤 Controle de Perfil
+
+O sistema também armazena o perfil do usuário autenticado na sessão:
+
+sessionMap.put("PERFIL", response.getPerfil());
+
+Atualmente são utilizados os perfis:
+
+ADMIN
+FUNCIONARIO
+
 ## 📂 Estrutura do Projeto
 
 ```text
