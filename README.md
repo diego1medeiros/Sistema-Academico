@@ -278,6 +278,8 @@ Atualmente são utilizados os perfis:
 ADMIN
 FUNCIONARIO
 
+```
+
 📍 Busca de CEP
 
 O cadastro de alunos possui integração para consulta automática de endereço através do CEP.
@@ -294,15 +296,12 @@ Exemplo:
 CEP: 27XXX-XXX
 
         ↓
-
 Rua
 Bairro
 Cidade
 Estado
 
 Isso reduz a necessidade de preenchimento manual do endereço e melhora a experiência do usuário.
-
-
 
 ## 📂 Estrutura do Projeto
 
@@ -331,7 +330,7 @@ Sistema-Academico
 ├── docker-compose.yml
 └── README.md
 
-```
+
 
 ## 🤖 Uso de Inteligência Artificial
 
