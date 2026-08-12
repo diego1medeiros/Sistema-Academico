@@ -83,6 +83,13 @@ public class AlunoService {
 		alunoExistente.setNome(aluno.getNome());
 		alunoExistente.setEmail(aluno.getEmail());
 		alunoExistente.setCpf(aluno.getCpf());
+		alunoExistente.setTelefone(aluno.getTelefone());
+		alunoExistente.getEndereco().setCep(aluno.getEndereco().getCep());
+        alunoExistente.getEndereco().setEstado(aluno.getEndereco().getEstado());
+        alunoExistente.getEndereco().setCidade(aluno.getEndereco().getCidade());
+        alunoExistente.getEndereco().setBairro(aluno.getEndereco().getBairro());
+        alunoExistente.getEndereco().setRua(aluno.getEndereco().getRua());
+        alunoExistente.getEndereco().setNumero(aluno.getEndereco().getNumero());
 
 		return alunoRepository.save(alunoExistente);
 	}

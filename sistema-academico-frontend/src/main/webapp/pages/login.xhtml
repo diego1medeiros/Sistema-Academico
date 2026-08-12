@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<link rel="stylesheet" href="CSS/login.css" />
+	<h:outputStylesheet library="CSS" name="login.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Sistema Academico</title>
+</h:head>
+<h:body>
+	<ui:composition template="/template/templatelogin.xhtml">
+		<ui:define name="conteudo">
+			<p:sidebar widgetVar="sidebar1" style="opacity:0.9; width: 450px;"
+				blockScroll="true">
+				<center>
+					<p:graphicImage library="imagens" name="logo1.png" width="280" />
+					<h3
+						style="font-weight: bold; font-size: 32px; color: white; text-shadow: 2px 2px 5px #000; margin: 0;">
+						🎓 Sistema Acadêmico</h3>
+					<h:form id="login">
+						<p:growl showDetail="true" id="mesagens" />
+						<p:toolbar style="opacity:0.9">
+							<p:toolbarGroup>
+								<p:panelGrid columns="1">
+
+									<p:outputLabel value="Login" for="login"
+										style=" font-weight: bold;" />
+									<p:inputText value="#{login}" id="login"
+										placeholder="digite o login" size="40" required="true"
+										requiredMessage="O login é obrigatoria" />
+
+									<p:outputLabel value="Senha" for="senha"
+										style=" font-weight: bold;" />
+									<p:password value="#{senha}" id="senha" toggleMask="true"
+										required="true" placeholder="digite o senha" size="40"
+										requiredMessage="A senha e obrigatoria" />
+								</p:panelGrid>
+							</p:toolbarGroup>
+						</p:toolbar>
+						<br />
+						<p:commandButton
+							action="#{usuarioBean.isLoginSenhaValida(login,senha)}"
+							value="Efetue Login" update="@form" process="@form"
+							style=" font-weight: bold;" styleClass="botao-login-inicial"
+							icon="pi pi-sign-in" />
+						<br />
+
+						<h:panelGroup layout="block"
+							style="margin-top:20px;text-align:center;">
+
+							<h3>Ainda não possui acesso ao sistema?</h3>
+
+							<h:outputText
+								value="Clique no botão abaixo para realizar o cadastro."
+								style="display:block;margin-bottom:10px;" />
+
+							<p:commandButton value="Cadastrar Novo Funcionário"
+								icon="pi pi-user-plus" type="button"
+								styleClass="ui-button-success"
+								onclick="PF('cadastroNovoFuncionario').show();" />
+
+						</h:panelGroup>
+					</h:form>
+				</center>
+			</p:sidebar>
+
+			<div
+				style="height: 100%; display: flex; justify-content: center; align-items: center; transform: translateX(-95px);">
+
+				<p:commandButton value="Efetuar Login"
+					styleClass="botao-login-inicial" type="button"
+					onclick="PF('sidebar1').show()" icon="pi pi-sign-in"
+					style="
+            width:220px;
+            height:70px;
+            opacity:0.95;
+            font-weight:bold;
+            font-size:20px;
+        " />
+
+			</div>
+
+
+			<h:form id="tabela">
+
+				<p:dialog
+    header="Cadastro de Usuário"
+    widgetVar="cadastroNovoFuncionario"
+    modal="true"
+    responsive="true"
+    resizable="false"
+    draggable="false"
+   
+    width="900"
+    fitViewport="true"
+    dynamic="true"
+    styleClass="dialog-cadastro">
+
+    <div style="max-height:65vh; overflow-y:auto; padding:10px;">
+					<p:toolbar>
+						<p:toolbarGroup>
+							<p:outputPanel class="ui-fluid" id="tabela1">
+								<p:growl showDetail="true" id="msn" />
+								<h:panelGrid id="pnResultado" columns="6" cellspacing="6"
+									cellpadding="6">
+
+									<p:panelGrid columns="2" layout="grid"
+										columnClasses="col-12 md:col-6,col-12 md:col-6"
+										styleClass="ui-fluid" style="width:100%;">
+										<p:outputLabel value="Nome" for="nomeCadastro"
+											style="font-weight:bold;" />
+
+										<p:inputText id="nomeCadastro" style="width:200%;height:45px"
+											value="#{usuarioBean.usuario.nome}" required="true"
+											requiredMessage="Informe o nome" placeholder="Digite o nome" />
+
+										<p:outputLabel value="Login" for="loginCadastro"
+											style="font-weight:bold;" />
+
+										<p:inputText id="loginCadastro" style="width:200%;height:45px"
+											value="#{usuarioBean.usuario.login}" required="true"
+											requiredMessage="Informe o login."
+											placeholder="Digite o login" />
+
+										<p:outputLabel value="Senha" for="senhaCadastro"
+											style="font-weight:bold;" />
+										<p:password id="senhaCadastro" style="width:200%;height:45px"
+											value="#{usuarioBean.usuario.senha}" required="true"
+											requiredMessage="Informe a senha." feedback="true"
+											toggleMask="true" placeholder="Digite a senha" />
+
+
+										<p:outputLabel value="Selecione o Perfil" for="perfil"
+											style="font-weight:bold; padding-right: 5px; float: right; " />
+
+										<p:selectOneMenu id="perfil"
+                 value="#{usuarioBean.usuario.perfil}"
+                 required="true"
+                 requiredMessage="Selecione um perfil."
+                 style="width:200%;height:45px">
+
+    <f:selectItem
+        itemLabel="Selecione a Função"
+        itemValue=""
+        noSelectionOption="true"/>
+
+    <f:selectItems value="#{usuarioBean.perfilEnum}" />
+
+</p:selectOneMenu>
+
+									</p:panelGrid>
+
+
+
+								</h:panelGrid>
+							</p:outputPanel>
+						</p:toolbarGroup>
+					</p:toolbar>
+					
+					</div>
+					<f:facet name="footer">
+						<p:commandButton value="Salvar" id="salvar"
+							styleClass="ui-button-info" update=":tabela:tabela1"
+							action="#{usuarioBean.cadastrar()}" icon="pi pi-save"
+							style="margin-tpo:10pix" />
+						<p:tooltip for="salvar" value="Salvar Funcionario"
+							showEffect="clip" hideEffect="fold" />
+						<font></font>
+						<font></font>
+						<p:commandButton value="Cancel" icon="pi pi-times"
+							onclick="PF('cadastroNovoFuncionario').hide()"
+							class="ui-button-secondary" type="button" />
+					</f:facet>
+				</p:dialog>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

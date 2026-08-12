@@ -1,128 +1,550 @@
 <!DOCTYPE html>
+
 <ui:composition template="/template/template.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html"
-	xmlns:f="jakarta.faces.core" xmlns:ui="jakarta.faces.facelets"
-	xmlns:p="http://primefaces.org/ui">
-
-	<ui:define name="conteudo">
-
-		<h:form id="formAluno">
-
-			<p:growl id="msg" showDetail="true" life="3000" />
-
-			<p:toolbar styleClass="mb-3">
-
-				<p:toolbarGroup>
-
-					<h2 style="margin: 0">
-						<i class="pi pi-book"></i> Cadastro de Alunos
-					</h2>
-
-				</p:toolbarGroup>
-
-				<p:toolbarGroup align="right">
-
-					<p:commandButton value="Novo aluno" icon="pi pi-plus"
-						process="@this" action="#{alunoBean.novoAluno}"
-						update=":formAluno:dialogAluno" oncomplete="PF('dlgAluno').show()" />
-
-				</p:toolbarGroup>
-
-			</p:toolbar>
-
-			<p:dataTable id="tabela" value="#{alunoBean.alunos}" var="aluno"
-				paginator="true" rows="10" stripedRows="true"
-				responsiveLayout="scroll" emptyMessage="Nenhum aluno encontrado.">
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="jakarta.faces.html"
+xmlns:f="jakarta.faces.core"
+xmlns:ui="jakarta.faces.facelets"
+xmlns:p="http://primefaces.org/ui">
 
 
-				<p:column headerText="Nome">
-                    #{aluno.nome}
-                </p:column>
+<ui:define name="conteudo">
 
-				<p:column headerText="Email">
-                    #{aluno.email}
-                </p:column>
+    <h:form id="formAluno">
 
-				<p:column headerText="Cpf">
-                    #{aluno.cpf}
-                </p:column>
+        <!-- MENSAGENS -->
+        <p:growl id="msg" showDetail="true" life="3000" />
 
-				<p:column headerText="Ações" width="180">
+        <!-- TOOLBAR -->
+        <p:toolbar styleClass="mb-3">
 
-					<p:commandButton icon="pi pi-pencil" styleClass="ui-button-warning"
-						process="@this" action="#{alunoBean.editarAluno(aluno)}"
-						update=":formAluno:dialogAluno" oncomplete="PF('dlgAluno').show()" />
+            <p:toolbarGroup>
 
-					<p:spacer width="10" />
+                <h2 style="margin: 0">
+                    <i class="pi pi-book"></i>
+                    Cadastro de Alunos
+                </h2>
 
-					<p:commandButton icon="pi pi-trash" styleClass="ui-button-danger"
-						process="@this" action="#{alunoBean.excluirAluno(aluno)}"
-						update="@form msg">
+            </p:toolbarGroup>
 
-						<p:confirm header="Confirmação"
-							message="Deseja excluir este aluno?"
-							icon="pi pi-exclamation-triangle" />
+            <p:toolbarGroup align="right">
 
-					</p:commandButton>
+                <p:commandButton
+                    value="Novo aluno"
+                    icon="pi pi-plus"
+                    process="@this"
+                    action="#{alunoBean.novoAluno}"
+                    update=":formAluno:dialogAluno"
+                    oncomplete="PF('dlgAluno').show()" />
 
-				</p:column>
+            </p:toolbarGroup>
 
-			</p:dataTable>
+        </p:toolbar>
 
-			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
-				responsive="true">
 
-				<p:commandButton value="Sim" type="button"
-					styleClass="ui-confirmdialog-yes ui-button-danger" />
+        <!-- TABELA -->
+        <p:dataTable
+            id="tabela"
+            value="#{alunoBean.alunos}"
+            var="aluno"
+            paginator="true"
+            rows="10"
+            stripedRows="true"
+            responsiveLayout="scroll"
+            style="min-width:1250px">
 
-				<p:commandButton value="Não" type="button"
-					styleClass="ui-confirmdialog-no ui-button-secondary" />
+            <!-- NOME -->
+            <p:column headerText="Nome" style="width:150px">
 
-			</p:confirmDialog>
+                <h:outputText
+                    value="#{aluno.nome}"
+                    style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block"
+                    title="#{aluno.nome}" />
 
-			<p:dialog id="dialogAluno" header="Cadastro de Aluno"
-				widgetVar="dlgAluno" modal="true" resizable="false"
-				responsive="true" width="600">
+            </p:column>
 
-				<p:panelGrid columns="2" layout="grid"
-					columnClasses="col-12 md:col-3,col-12 md:col-9"
-					styleClass="ui-fluid">
 
-					<p:outputLabel for="nome" value="Nome" />
+            <!-- EMAIL -->
+            <p:column headerText="Email" style="width:150px">
 
-					<p:inputText id="nome" value="#{alunoBean.aluno.nome}"
-						required="true" requiredMessage="Informe o nome do aluno." />
+                <h:outputText
+                    value="#{aluno.email}"
+                    style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block"
+                    title="#{aluno.email}" />
 
-					<p:outputLabel for="email" value="Email" />
+            </p:column>
 
-					<p:inputText id="email" rows="4" autoResize="false"
-						value="#{alunoBean.aluno.email}" required="true"
-						requiredMessage="Informe a email." />
 
-					<p:outputLabel for="cpf" value="Cpf" />
+            <!-- CPF -->
+            <p:column
+                headerText="CPF"
+                style="width:120px;text-align:center;white-space:nowrap">
 
-					<p:inputMask id="cpf" rows="4" autoResize="false"
-						mask="999.999.999-99" value="#{alunoBean.aluno.cpf}"
-						required="true" validateMask="true"
-						requiredMessage="Informe a cpf." />
+                <h:outputText value="#{aluno.cpf}" />
 
-				</p:panelGrid>
+            </p:column>
 
-				<f:facet name="footer">
 
-					<p:commandButton value="Salvar" icon="pi pi-save"
-						action="#{alunoBean.salvarAluno}" update=":formAluno"
-						oncomplete="if(!args.validationFailed) PF('dlgAluno').hide();" />
+            <!-- TELEFONE -->
+            <p:column
+                headerText="Telefone"
+                style="width:120px;text-align:center;white-space:nowrap">
 
-					<p:commandButton value="Cancelar" icon="pi pi-times" type="button"
-						styleClass="ui-button-secondary" onclick="PF('dlgAluno').hide()" />
+                <h:outputText value="#{aluno.telefone}" />
 
-				</f:facet>
+            </p:column>
 
-			</p:dialog>
 
-		</h:form>
+            <!-- CEP -->
+            <p:column
+                headerText="CEP"
+                style="width:90px;text-align:center;white-space:nowrap">
 
-	</ui:define>
+                <h:outputText value="#{aluno.endereco.cep}" />
+
+            </p:column>
+
+
+            <!-- BAIRRO -->
+            <p:column headerText="Bairro" style="width:150px">
+
+                <h:outputText
+                    value="#{aluno.endereco.bairro}"
+                    style="white-space:normal;word-wrap:break-word;display:block"
+                    title="#{aluno.endereco.bairro}" />
+
+            </p:column>
+
+
+            <!-- CIDADE -->
+            <p:column
+                headerText="Cidade"
+                style="width:80px;text-align:center">
+
+                <h:outputText value="#{aluno.endereco.cidade}" />
+
+            </p:column>
+
+
+            <!-- ESTADO -->
+            <p:column
+                headerText="UF"
+                style="width:45px;text-align:center">
+
+                <h:outputText value="#{aluno.endereco.estado}" />
+
+            </p:column>
+
+
+            <!-- RUA -->
+            <p:column headerText="Rua" style="width:180px">
+
+                <h:outputText
+                    value="#{aluno.endereco.rua}"
+                    style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block"
+                    title="#{aluno.endereco.rua}" />
+
+            </p:column>
+
+
+            <!-- NUMERO -->
+            <p:column
+                headerText="Nº"
+                style="width:50px;text-align:center">
+
+                <h:outputText value="#{aluno.endereco.numero}" />
+
+            </p:column>
+
+
+            <!-- AÇÕES -->
+            <p:column
+                headerText="Ações"
+                style="width:90px;text-align:center">
+
+                <!-- EDITAR -->
+                <p:commandButton
+                    icon="pi pi-pencil"
+                    styleClass="ui-button-warning ui-button-sm"
+                    process="@this"
+                    action="#{alunoBean.editarAluno(aluno)}"
+                    update=":formAluno:dialogAluno"
+                    oncomplete="PF('dlgAluno').show()" />
+
+
+                <!-- EXCLUIR -->
+                <p:commandButton
+                    icon="pi pi-trash"
+                    styleClass="ui-button-danger ui-button-sm"
+                    process="@this"
+                    action="#{alunoBean.excluirAluno(aluno)}"
+                    update="@form msg"
+                    style="margin-left:3px">
+
+                    <p:confirm
+                        header="Confirmação"
+                        message="Deseja excluir este aluno?"
+                        icon="pi pi-exclamation-triangle" />
+
+                </p:commandButton>
+
+            </p:column>
+
+        </p:dataTable>
+
+
+        <!-- CONFIRMAÇÃO -->
+        <p:confirmDialog
+            global="true"
+            showEffect="fade"
+            hideEffect="fade"
+            responsive="true">
+
+            <p:commandButton
+                value="Sim"
+                type="button"
+                styleClass="ui-confirmdialog-yes ui-button-danger" />
+
+            <p:commandButton
+                value="Não"
+                type="button"
+                styleClass="ui-confirmdialog-no ui-button-secondary" />
+
+        </p:confirmDialog>
+
+
+        <!-- ===================================================== -->
+        <!-- DIALOG -->
+        <!-- ===================================================== -->
+
+        <p:dialog
+            id="dialogAluno"
+            header="👨 Cadastro de Aluno"
+            widgetVar="dlgAluno"
+            modal="true"
+            resizable="false"
+            draggable="false"
+            responsive="true"
+            width="750">
+
+            <div
+                style="max-height:65vh;overflow-y:auto;padding-right:10px;">
+
+                <style>
+
+                    .linha {
+                        display:flex;
+                        gap:15px;
+                        margin-bottom:15px;
+                    }
+
+                    .campo {
+                        flex:1;
+                    }
+
+                    .campo-pequeno {
+                        width:170px;
+                    }
+
+                    .titulo {
+                        font-weight:bold;
+                        font-size:15px;
+                        color:#495057;
+                        margin:15px 0 10px;
+                        border-bottom:1px solid #dee2e6;
+                        padding-bottom:5px;
+                    }
+
+                    .botoes {
+                        display:flex;
+                        justify-content:flex-end;
+                        gap:10px;
+                        margin-top:20px;
+                    }
+
+                </style>
+
+
+                <!-- ================================================= -->
+                <!-- DADOS PESSOAIS -->
+                <!-- ================================================= -->
+
+                <div class="titulo">
+                    Dados Pessoais
+                </div>
+
+
+                <!-- NOME -->
+
+                <div class="linha">
+
+                    <div class="campo">
+
+                        <p:outputLabel
+                            for="nome"
+                            value="Nome *" />
+
+                        <p:inputText
+                            id="nome"
+                            value="#{alunoBean.aluno.nome}"
+                            style="width:100%"
+                            required="true"
+                            requiredMessage="Informe o nome." />
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL / CPF / TELEFONE -->
+
+                <div class="linha">
+
+                    <div class="campo">
+
+                        <p:outputLabel
+                            for="email"
+                            value="E-mail *" />
+
+                        <p:inputText
+                            id="email"
+                            value="#{alunoBean.aluno.email}"
+                            style="width:100%"
+                            required="true"
+                            requiredMessage="Informe o e-mail." />
+
+                    </div>
+
+
+                    <div class="campo-pequeno">
+
+                        <p:outputLabel
+                            for="cpf"
+                            value="CPF *" />
+
+                        <p:inputMask
+                            id="cpf"
+                            mask="999.999.999-99"
+                            value="#{alunoBean.aluno.cpf}"
+                            style="width:100%"
+                            required="true"
+                            requiredMessage="Informe o CPF." />
+
+                    </div>
+
+
+                    <div class="campo-pequeno">
+
+                        <p:outputLabel
+                            for="telefone"
+                            value="Telefone *" />
+
+                        <p:inputMask
+                            id="telefone"
+                            mask="(99)99999-9999"
+                            value="#{alunoBean.aluno.telefone}"
+                            style="width:100%"
+                            required="true"
+                            requiredMessage="Informe o telefone." />
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- ENDEREÇO -->
+                <!-- ================================================= -->
+
+                <div class="titulo">
+                    Endereço
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- PAINEL DO ENDEREÇO -->
+                <!-- ================================================= -->
+
+                <p:outputPanel id="painelEndereco">
+
+
+                    <!-- CEP / ESTADO / CIDADE -->
+
+                    <div class="linha">
+
+
+                        <!-- CEP -->
+
+                        <div class="campo-pequeno">
+
+                            <p:outputLabel
+                                for="cep"
+                                value="CEP" />
+
+
+                            <div
+                                style="display:flex;gap:5px;align-items:center;">
+
+                                <p:inputMask
+                                    id="cep"
+                                    mask="99999-999"
+                                    value="#{alunoBean.aluno.endereco.cep}"
+                                    style="width:120px" />
+
+
+                                <!-- BUSCAR CEP -->
+
+                                <p:commandButton
+    id="btnBuscarCep"
+    icon="pi pi-search"
+    action="#{alunoBean.encontraCEP}"
+    process="@this cep"
+    update="painelEndereco msg"
+    immediate="false"
+    validateClient="false"
+    title="Buscar CEP" />
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ESTADO -->
+
+                        <div class="campo">
+
+                            <p:outputLabel
+                                for="estado"
+                                value="Estado" />
+
+                            <p:inputText
+                                id="estado"
+                                value="#{alunoBean.aluno.endereco.estado}"
+                                style="width:100%"
+                                readonly="true" />
+
+                        </div>
+
+
+                        <!-- CIDADE -->
+
+                        <div class="campo">
+
+                            <p:outputLabel
+                                for="cidade"
+                                value="Cidade" />
+
+                            <p:inputText
+                                id="cidade"
+                                value="#{alunoBean.aluno.endereco.cidade}"
+                                style="width:100%"
+                                readonly="true" />
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BAIRRO -->
+
+                    <div class="linha">
+
+                        <div class="campo">
+
+                            <p:outputLabel
+                                for="bairro"
+                                value="Bairro" />
+
+                            <p:inputText
+                                id="bairro"
+                                value="#{alunoBean.aluno.endereco.bairro}"
+                                style="width:100%"
+                                readonly="true" />
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- RUA / NÚMERO -->
+
+                    <div class="linha">
+
+                        <div class="campo">
+
+                            <p:outputLabel
+                                for="rua"
+                                value="Rua" />
+
+                            <p:inputText
+                                id="rua"
+                                value="#{alunoBean.aluno.endereco.rua}"
+                                style="width:100%"
+                                readonly="true" />
+
+                        </div>
+
+
+                        <div class="campo-pequeno">
+
+                            <p:outputLabel
+                                for="numero"
+                                value="Número" />
+
+                            <p:inputText
+                                id="numero"
+                                value="#{alunoBean.aluno.endereco.numero}"
+                                style="width:100%" />
+
+                        </div>
+
+                    </div>
+
+                </p:outputPanel>
+
+            </div>
+
+
+            <!-- ===================================================== -->
+            <!-- RODAPÉ -->
+            <!-- ===================================================== -->
+
+            <f:facet name="footer">
+
+                <div class="botoes">
+
+
+                    <!-- SALVAR -->
+
+                    <p:commandButton
+                        id="salvar"
+                        value="Salvar"
+                        icon="pi pi-save"
+                        styleClass="ui-button-success"
+                        action="#{alunoBean.salvarAluno}"
+                        process="@form"
+                        update=":formAluno"
+                        oncomplete="if (!args.validationFailed) PF('dlgAluno').hide();" />
+
+
+                    <!-- CANCELAR -->
+
+                    <p:commandButton
+                        value="Cancelar"
+                        icon="pi pi-times"
+                        type="button"
+                        styleClass="ui-button-secondary"
+                        onclick="PF('dlgAluno').hide()" />
+
+                </div>
+
+            </f:facet>
+
+        </p:dialog>
+
+    </h:form>
+
+</ui:define>
+
 
 </ui:composition>

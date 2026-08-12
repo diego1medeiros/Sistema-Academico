@@ -4,7 +4,14 @@ CREATE TABLE alunos (
     id BIGSERIAL PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    cpf VARCHAR(20) NOT NULL UNIQUE
+    telefone varchar(100) not null unique,
+    cpf VARCHAR(20) NOT NULL UNIQUE,
+     rua varchar(100) not null,
+    bairro varchar(100) not null,
+    cidade varchar(100) not null,
+    cep varchar(9) not null,
+    numero varchar(20),
+    estado varchar(2) not null
 );
 
 
@@ -14,7 +21,16 @@ CREATE TABLE cursos (
     descricao TEXT
 );
 
+CREATE TABLE usuarios (
 
+    id BIGSERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    login VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    perfil VARCHAR(30) NOT NULL
+    
+);
+    
 
 CREATE TABLE disciplinas (
     id BIGSERIAL PRIMARY KEY,

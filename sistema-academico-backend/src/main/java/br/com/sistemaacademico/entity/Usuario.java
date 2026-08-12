@@ -1,24 +1,29 @@
 package br.com.sistemaacademico.entity;
 
+
+import br.com.sistemaacademico.enun.Perfil;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "usuarios")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "alunos")
-@Entity
-public class Aluno {
+public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,15 +33,18 @@ public class Aluno {
 	private String nome;
 
 	@Column(nullable = false, unique = true)
-	private String email;
+	private String login;
 
-	@Column(nullable = false, unique = true)
-	private String cpf;
-	
-	@Column(nullable = false, unique = true)
-	private String telefone;
-	
-	@Embedded
-	private Endereco endereco = new Endereco();
+	@Column(nullable = false)
+	private String senha;
+
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private Perfil perfil;
+
+	//@Column(name = "funcionario_id")
+	//private Long funcionarioId;
 
 }
+
+

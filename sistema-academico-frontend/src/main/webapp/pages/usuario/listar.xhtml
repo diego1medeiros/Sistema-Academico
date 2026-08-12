@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<ui:composition
+    template="/template/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="jakarta.faces.html"
+    xmlns:f="jakarta.faces.core"
+    xmlns:ui="jakarta.faces.facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="conteudo">
+
+        <h:form id="formUsuario">
+
+            <p:growl id="msg" showDetail="true"/>
+
+            <p:toolbar style="margin-bottom:20px">
+
+                <p:toolbarGroup>
+
+                    <h2 style="margin:0;color:#1565C0">
+                        <i class="pi pi-users"></i>
+                        Gerenciamento de Usuários
+                    </h2>
+
+                </p:toolbarGroup>
+
+              
+
+            </p:toolbar>
+
+            <p:dataTable
+                id="tabela"
+                value="#{usuarioBean.listaUsuarios}"
+                var="usuario"
+                paginator="true"
+                rows="10"
+                stripedRows="true"
+                responsiveLayout="scroll"
+                emptyMessage="Nenhum usuário encontrado.">
+
+                <p:column headerText="Nome" sortBy="#{usuario.nome}">
+                    #{usuario.nome}
+                </p:column>
+
+                <p:column headerText="Login">
+                    #{usuario.login}
+                </p:column>
+
+                <p:column headerText="Perfil">
+                    #{usuario.perfil}
+                </p:column>
+
+                <p:column
+                    headerText="Ações"
+                    style="width:160px;text-align:center">
+
+                  
+
+                    <p:spacer width="10"/>
+
+                    <p:commandButton
+                        icon="pi pi-trash"
+                        styleClass="ui-button-danger"
+                        process="@this"
+                        action="#{usuarioBean.excluir(usuario)}"
+                        update="@form">
+
+                        <p:confirm
+                            header="Confirmação"
+                            message="Deseja realmente excluir este usuário?"
+                            icon="pi pi-exclamation-triangle"/>
+
+                    </p:commandButton>
+
+                </p:column>
+
+            </p:dataTable>
+
+            <!-- Dialog -->
+
+            <p:dialog
+                id="dialogUsuario"
+                widgetVar="dlgUsuario"
+                header="Cadastro de Usuário"
+                modal="true"
+                width="650"
+                resizable="false"
+                appendTo="@(body)">
+
+                <p:panelGrid columns="2"
+                             styleClass="ui-fluid"
+                             columnClasses="col-3,col-9">
+
+                    <p:outputLabel value="Nome"/>
+
+                    <p:inputText
+                        value="#{usuarioBean.usuario.nome}"
+                        required="true"
+                        requiredMessage="Informe o nome."/>
+
+                    <p:outputLabel value="Login"/>
+
+                    <p:inputText
+                        value="#{usuarioBean.usuario.login}"
+                        required="true"
+                        requiredMessage="Informe o login."/>
+
+                    <p:outputLabel value="Senha"/>
+
+                    <p:password
+                        value="#{usuarioBean.usuario.senha}"
+                        toggleMask="true"
+                        feedback="true"
+                        required="true"
+                        requiredMessage="Informe a senha."/>
+
+                    <p:outputLabel value="Perfil"/>
+
+                    <p:selectOneMenu
+                        value="#{usuarioBean.usuario.perfil}"
+                        required="true"
+                        requiredMessage="Selecione um perfil.">
+
+                        <f:selectItem
+                            itemLabel="Selecione..."
+                            itemValue=""
+                            noSelectionOption="true"/>
+
+                        <f:selectItems
+                            value="#{usuarioBean.perfilEnum}"/>
+
+                    </p:selectOneMenu>
+
+                </p:panelGrid>
+
+                <f:facet name="footer">
+
+                    <p:commandButton
+                        value="Salvar"
+                        icon="pi pi-save"
+                        styleClass="ui-button-success"
+                        action="#{usuarioBean.salvar}"
+                        update="@form"/>
+
+                    <p:commandButton
+                        value="Cancelar"
+                        icon="pi pi-times"
+                        styleClass="ui-button-secondary"
+                        type="button"
+                        onclick="PF('dlgUsuario').hide()"/>
+
+                </f:facet>
+
+            </p:dialog>
+
+            <p:confirmDialog global="true">
+
+                <p:commandButton
+                    value="Sim"
+                    type="button"
+                    styleClass="ui-confirmdialog-yes ui-button-danger"/>
+
+                <p:commandButton
+                    value="Não"
+                    type="button"
+                    styleClass="ui-confirmdialog-no ui-button-secondary"/>
+
+            </p:confirmDialog>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

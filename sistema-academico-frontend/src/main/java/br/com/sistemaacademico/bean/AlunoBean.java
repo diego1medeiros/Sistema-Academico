@@ -3,12 +3,18 @@ package br.com.sistemaacademico.bean;
 import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 import br.com.sistemaacademico.dto.AlunoDTO;
+import br.com.sistemaacademico.dto.EnderecoDTO;
 import br.com.sistemaacademico.service.AlunoService;
+import br.com.sistemaacademico.utils.BuscaCep;
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.RequestScoped;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import java.util.List;
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -78,6 +84,7 @@ public class AlunoBean implements Serializable {
 				alunoService.salvarAluno(aluno);
 				MensagemUtils.info("Cadastro", "Aluno cadastrado com sucesso.");
 			} else {
+			
 				alunoService.atualizarAluno(aluno);
 				MensagemUtils.info("Atualizado", "Aluno atualizado com sucesso.");
 			}
@@ -138,6 +145,30 @@ public class AlunoBean implements Serializable {
 		this.aluno = alunoService.buscarAluno(aluno.getId());
 
 	}
+	
+	
+	// busca Cep do cliente
+			public void encontraCEP() {
+				BuscaCep buscaCep = new BuscaCep(aluno.getEndereco().getCep());
+				
+				
+				System.out.println("CEP informado: " + aluno.getEndereco().getCep());
+				
+				  System.out.println("Resultado CEP: " + buscaCep.getResultado());
+				    System.out.println("Rua: " + buscaCep.getLogradouro());
+				    System.out.println("Bairro: " + buscaCep.getBairro());
+				    System.out.println("Cidade: " + buscaCep.getCidade());
+				    System.out.println("Estado: " + buscaCep.getEstado());
+
+				if (buscaCep.getResultado() == 1) {
+					aluno.getEndereco().setRua(buscaCep.getTipoLogradouro() + " " + buscaCep.getLogradouro());
+					aluno.getEndereco().setEstado(buscaCep.getEstado());
+					aluno.getEndereco().setCidade(buscaCep.getCidade());
+					aluno.getEndereco().setBairro(buscaCep.getBairro());
+				} else {
+					MensagemUtils.erro("Erro","CEP não foi encontrado");
+				}
+			}
 
 	/**
 	 * Consulta todos os alunos cadastrados no backend.
@@ -152,9 +183,9 @@ public class AlunoBean implements Serializable {
 	 * Limpa o formulário criando um novo objeto aluno.
 	 */
 	public void novoAluno() {
-
-		aluno = new AlunoDTO();
-
+	    aluno = new AlunoDTO();
+	    aluno.setEndereco(new EnderecoDTO());
+	
 	}
 
 }

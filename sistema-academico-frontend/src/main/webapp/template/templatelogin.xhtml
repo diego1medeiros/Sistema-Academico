@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html"
+	xmlns:p="http://primefaces.org/ui" xmlns:ui="jakarta.faces.facelets">
+
+<h:head>
+<h:outputStylesheet library="css" name="style.css"/>
+	<title>Sistema Acadêmico</title>
+</h:head>
+
+<h:body
+style="
+background-image:url('#{resource['images/background.png']}');
+background-size:cover;
+background-repeat:no-repeat;
+background-position:center;
+background-attachment:fixed;">
+
+	<div style="
+height:100vh;
+display:flex;
+flex-direction:column;
+background:rgba(0,0,0,0.25);
+">
+		<div style="
+    padding: 15px;
+    border-bottom: 1px solid rgba(255,255,255,.5);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+">
+
+    <h3 style="
+        font-weight:bold;
+        font-size:32px;
+        color:white;
+        text-shadow:2px 2px 5px #000;
+        margin:0;
+    ">
+        🎓 Sistema Acadêmico
+    </h3>
+
+</div>
+		<div style="flex: 1; display: flex;">
+			<div
+				style="width: 250px; border-right: 1px solid #ccc; padding: 10px;">
+
+				
+			</div>
+
+			
+			<div style="flex: 1; padding: 20px;">
+				<ui:insert name="conteudo" />
+			</div>
+
+		</div>
+
+	</div>
+
+</h:body>
+
+</html>

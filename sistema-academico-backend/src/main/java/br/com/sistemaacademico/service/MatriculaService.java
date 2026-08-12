@@ -76,7 +76,6 @@ public class MatriculaService {
 
 		
 		if (turma.getStatus() != StatusTurma.ABERTA) {
-			 
 			throw new RegraNegocioException("Turma não está aberta");
 		}
 		if (turma.getVagasDisponiveis() <= 0) {
@@ -116,7 +115,6 @@ public class MatriculaService {
 				.orElseThrow(() -> new RuntimeException("Matrícula não encontrada"));
 
 		if (matricula.getStatus() == StatusMatricula.CONFIRMADA) {
-
 			throw new RegraNegocioException("Matrícula já confirmada");
 		}
 

@@ -1,60 +1,136 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html"
-	xmlns:p="http://primefaces.org/ui" xmlns:ui="jakarta.faces.facelets">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="jakarta.faces.facelets">
 
 <h:head>
-<h:outputStylesheet library="css" name="style.css"/>
-	<title>Sistema Acadêmico</title>
+
+    <title>Sistema Acadêmico</title>
+
+    <h:outputStylesheet library="css" name="style.css"/>
+
 </h:head>
 
-<h:body
-style="
-background-image:url('#{resource['images/background.png']}');
-background-size:cover;
-background-repeat:no-repeat;
-background-position:center;
-background-attachment:fixed;">
+<h:body style="
+    background-image:url('#{resource['images/background.png']}');
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-attachment:fixed;">
 
-	<div style="height: 100vh; display: flex; flex-direction: column;">
-		<div style="padding: 15px; border-bottom: 1px solid #ccc;">
-			<h3 style="font-weight: bold; font-size: 32px "> 🎓 Sistema Acadêmico</h3>
-		</div>
-		<div style="flex: 1; display: flex;">
-			<div
-				style="width: 250px; border-right: 1px solid #ccc; padding: 10px;">
+    <div style="height:100vh; display:flex; flex-direction:column;">
 
-				<p:menu>
+        <!-- Cabeçalho -->
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:15px 30px;
+            background:rgba(255,255,255,.92);
+            border-bottom:1px solid #dcdcdc;
+            box-shadow:0 2px 8px rgba(0,0,0,.15);">
 
-					<p:menuitem value="Dashboard" url="/pages/dashboard.xhtml" style="font-weight: bold; font-size: 22px "
-						icon="pi pi-home" />
+            <h2 style="
+                margin:0;
+                color:#1565C0;
+                font-size:32px;
+                font-weight:bold;">
 
-					<p:menuitem value="Alunos" url="/pages/aluno/listar.xhtml" style="font-weight: bold; font-size: 22px "
-						icon="pi pi-users" />
+                🎓 Sistema Acadêmico
 
-					<p:menuitem value="Cursos" url="/pages/cursos/listar.xhtml" style="font-weight: bold; font-size: 22px "
-						icon="pi pi-book" />
+            </h2>
 
-					<p:menuitem value="Disciplinas" style="font-weight: bold; font-size: 22px "
-						url="/pages/disciplina/listar.xhtml" icon="pi pi-list" />
+            <h:form>
 
-					<p:menuitem value="Turmas" url="/pages/turma/listar.xhtml" style="font-weight: bold; font-size: 22px "
-						icon="pi pi-calendar" />
+                <p:menuButton
+                    value="#{sessionScope.NOME}"
+                    icon="pi pi-user"
+                    styleClass="ui-button-info">
 
-					<p:menuitem value="Matrículas" url="/pages/matricula/listar.xhtml" style="font-weight: bold; font-size: 22px "
-						icon="pi pi-check" />
+                    <p:menuitem
+                        value="#{sessionScope.PERFIL}"
+                        icon="pi pi-id-card"
+                        disabled="true"/>
 
-				</p:menu>
-			</div>
+                    <p:separator/>
 
-			
-			<div style="flex: 1; padding: 20px;">
-				<ui:insert name="conteudo" />
-			</div>
+                    <p:menuitem
+                        value="Sair"
+                        icon="pi pi-sign-out"
+                        action="#{usuarioBean.logout}"/>
 
-		</div>
+                </p:menuButton>
 
-	</div>
+            </h:form>
+
+        </div>
+
+        <!-- Corpo -->
+        <div style="flex:1; display:flex;">
+
+            <!-- Menu -->
+            <div style="
+                width:260px;
+                background:rgba(255,255,255,.92);
+                border-right:1px solid #ddd;
+                padding:15px;">
+
+                <p:menu>
+
+                    <p:menuitem
+                        value="Dashboard"
+                        icon="pi pi-home"
+                        url="/pages/dashboard.xhtml"/>
+
+                    <p:menuitem
+                        value="Alunos"
+                        icon="pi pi-users"
+                        url="/pages/aluno/listar.xhtml"/>
+
+                    <p:menuitem
+                        value="Cursos"
+                        icon="pi pi-book"
+                        url="/pages/cursos/listar.xhtml"/>
+
+                    <p:menuitem
+                        value="Disciplinas"
+                        icon="pi pi-list"
+                        url="/pages/disciplina/listar.xhtml"/>
+
+                    <p:menuitem
+                        value="Turmas"
+                        icon="pi pi-calendar"
+                        url="/pages/turma/listar.xhtml"/>
+
+                    <p:menuitem
+                        value="Matrículas"
+                        icon="pi pi-check-square"
+                        url="/pages/matricula/listar.xhtml"/>
+                        
+                        <p:menuitem
+    value="Usuários" rendered="#{usuarioBean.admin}"
+    icon="pi pi-user"
+    url="/pages/usuario/listar.xhtml"/>
+
+                </p:menu>
+
+            </div>
+
+            <!-- Conteúdo -->
+            <div style="
+                flex:1;
+                padding:25px;
+                overflow:auto;">
+
+                <ui:insert name="conteudo"/>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </h:body>
 
