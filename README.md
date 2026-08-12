@@ -647,18 +647,16 @@ Algumas decisões tomadas:
 
 ## 🚀 Próximas Evoluções
 
-Implementação de Spring Security.
-Autenticação utilizando JWT.
-Controle de autorização por perfil.
-Testes unitários.
-Testes de integração.
-Melhorias no controle de concorrência das matrículas.
-Deploy em nuvem.
-Pipeline CI/CD.
-Observabilidade com Spring Boot Actuator.
-Monitoramento da aplicação.
-
-
+- Implementação de Spring Security.
+- Autenticação utilizando JWT.
+- Controle de autorização por perfil.
+- Testes unitários.
+- Testes de integração.
+- Melhorias no controle de concorrência das matrículas.
+- Deploy em nuvem.
+- Pipeline CI/CD.
+- Observabilidade com Spring Boot Actuator.
+- Monitoramento da aplicação.
 ---
 
 ## 👨‍💻 Desenvolvedor
@@ -672,13 +670,13 @@ Desenvolvedor Java Backend / Full Stack
 
 ## 📄 Licença
 
-Java
-Spring Boot
-JSF
-PrimeFaces
-PostgreSQL
-Docker
-APIs REST
+- Java
+- Spring Boot
+- JSF
+- PrimeFaces
+- PostgreSQL
+- Docker
+- APIs REST
 
 ---
 
