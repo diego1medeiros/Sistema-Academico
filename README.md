@@ -573,48 +573,44 @@ Resultado esperado:
 
 ## 🎯 Regra de Limite de Vagas
 
-
-🔒 Controle de Vagas
+### 🔒 Controle de Vagas
 
 Cada turma possui uma quantidade máxima de vagas.
 
-Exemplo:
+**Exemplo:**
 
-- Vagas:              5
-- Vagas disponíveis:  5
+| Informação | Quantidade |
+|---|---:|
+| Vagas | 5 |
+| Vagas disponíveis | 5 |
 
-Após confirmar uma matrícula:
+Após a confirmação de uma matrícula:
 
-- Vagas:              5
-- Vagas disponíveis:  4
+| Informação | Quantidade |
+|---|---:|
+| Vagas | 5 |
+| Vagas disponíveis | 4 |
 
 Quando não existem mais vagas:
 
-- Vagas disponíveis: 0
+| Informação | Quantidade |
+|---|---:|
+| Vagas | 5 |
+| Vagas disponíveis | 0 |
 
-A confirmação é bloqueada e o sistema informa:
+Nesse cenário, uma nova tentativa de confirmação de matrícula é bloqueada pelo sistema.
 
-Não há vagas disponíveis.
+O sistema retorna a mensagem:
 
-O controle de concorrência das confirmações é uma evolução importante para garantir consistência quando múltiplos usuários tentarem confirmar matrículas simultaneamente.
+> ❌ **Não há vagas disponíveis.**
 
+### 🔐 Controle de Concorrência
 
+O controle de concorrência das confirmações de matrícula é importante para garantir a consistência das vagas quando **dois ou mais usuários tentam confirmar uma matrícula simultaneamente**.
 
+O objetivo é impedir que duas confirmações sejam processadas ao mesmo tempo e ultrapassem a quantidade máxima de vagas disponível na turma.
 
-
-Cada turma possui um número máximo de vagas.
-
-Exemplo:
-
-- Limite da turma: **5 alunos**
-- Matrículas confirmadas: **5**
-
-Ao tentar confirmar a matrícula do sexto aluno:
-
-- ❌ A matrícula é bloqueada.
-- ❌ O sistema retorna a mensagem:
-
-> Não há vagas disponíveis.
+---
 
 ## 💡 Decisões de Implementação
 
