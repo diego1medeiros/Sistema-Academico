@@ -166,52 +166,59 @@ Sistema-Academico
 
 # 📋 Funcionalidades
 
-👨‍🎓 Alunos
-Cadastro de alunos
-Edição de alunos
-Exclusão de alunos
-Listagem de alunos
-Validação de campos obrigatórios
-Cadastro de endereço
-Busca automática de endereço através do CEP
+## 👨‍🎓 Alunos
 
-📚 Cursos
-Cadastro de cursos
-Edição de cursos
-Exclusão de cursos
-Listagem de cursos
+- ✅ Cadastro de alunos
+- ✅ Edição de alunos
+- ✅ Exclusão de alunos
+- ✅ Listagem de alunos
+- ✅ Validação de campos obrigatórios
+- ✅ Cadastro de endereço
+- ✅ Busca automática de endereço através do CEP
 
-📘 Disciplinas
-Cadastro de disciplinas
-Associação com cursos
-Edição
-Exclusão
-Listagem
+## 📚 Cursos
 
-🏫 Turmas
-Cadastro de turmas
-Associação com disciplinas
-Definição de quantidade de vagas
-Controle de vagas disponíveis
-Controle de status da turma
-Ativação/desativação da turma
+- ✅ Cadastro de cursos
+- ✅ Edição de cursos
+- ✅ Exclusão de cursos
+- ✅ Listagem de cursos
 
-📝 Matrículas
-Solicitação de matrícula
-Consulta de matrículas
-Confirmação de matrícula
-Cancelamento de matrícula
-Controle de vagas
-Validação para evitar matrícula duplicada
+## 📘 Disciplinas
 
-👤 Usuários
-Cadastro de usuários
-Exclusão de usuários
-Login
-Logout
-Controle de perfil
+- ✅ Cadastro de disciplinas
+- ✅ Associação com cursos
+- ✅ Edição de disciplinas
+- ✅ Exclusão de disciplinas
+- ✅ Listagem de disciplinas
 
----
+## 🏫 Turmas
+
+- ✅ Cadastro de turmas
+- ✅ Associação com disciplinas
+- ✅ Definição de quantidade de vagas
+- ✅ Controle de vagas disponíveis
+- ✅ Controle de status da turma
+- ✅ Ativação/desativação da turma
+
+## 📝 Matrículas
+
+- ✅ Solicitação de matrícula
+- ✅ Consulta de matrículas
+- ✅ Confirmação de matrícula
+- ✅ Cancelamento de matrícula
+- ✅ Controle de vagas
+- ✅ Validação para evitar matrícula duplicada
+
+## 👤 Usuários
+
+- ✅ Cadastro de usuários
+- ✅ Exclusão de usuários
+- ✅ Login
+- ✅ Logout
+- ✅ Controle de perfil
+- ✅ Controle de acesso às páginas
+- ✅ Autorizador utilizando `PhaseListener`
+- 🔄 Autenticação com JWT — planejado
 
 ## 📂 Estrutura do Projeto
 
