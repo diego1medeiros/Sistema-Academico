@@ -22,6 +22,8 @@ A aplicação permite o gerenciamento de alunos, cursos, disciplinas, turmas e m
 - 🏗 Arquitetura
 - 🚀 Tecnologias
 - 📋 Funcionalidades
+- 🔐 Autenticação e Controle de Acesso
+- 📍 Busca de CEP
 - 📂 Estrutura do Projeto
 - 🐳 Banco de Dados
 - 🚀 Como Executar
@@ -31,13 +33,11 @@ A aplicação permite o gerenciamento de alunos, cursos, disciplinas, turmas e m
 - 📸 Capturas de Tela
 - 📝 Fluxo de Matrícula
 - 🎯 Regras de Negócio
-- 💡 Decisões
+- 💡 Decisões de Implementação
 - ⚠️ Limitações
+- 🚧 Status do Projeto
+- 🚀 Próximas Evoluções
 - 👨‍💻 Desenvolvedor
-
-
-
-
 
 ## 📚 Sobre o Projeto
 
