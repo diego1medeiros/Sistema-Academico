@@ -647,11 +647,16 @@ Algumas decisões tomadas:
 
 ## 🚀 Próximas Evoluções
 
-- Spring Security + JWT
-- Testes de integração
-- Deploy em nuvem
-- Pipeline CI/CD
-- Observabilidade (Actuator)
+Implementação de Spring Security.
+Autenticação utilizando JWT.
+Controle de autorização por perfil.
+Testes unitários.
+Testes de integração.
+Melhorias no controle de concorrência das matrículas.
+Deploy em nuvem.
+Pipeline CI/CD.
+Observabilidade com Spring Boot Actuator.
+Monitoramento da aplicação.
 
 
 ---
@@ -667,7 +672,13 @@ Desenvolvedor Java Backend / Full Stack
 
 ## 📄 Licença
 
-Este projeto foi desenvolvido para fins acadêmicos e demonstração de conhecimentos em Java, Spring Boot, JSF e PostgreSQL.
+Java
+Spring Boot
+JSF
+PrimeFaces
+PostgreSQL
+Docker
+APIs REST
 
 ---
 
@@ -675,16 +686,26 @@ Este projeto foi desenvolvido para fins acadêmicos e demonstração de conhecim
 
 Durante o desenvolvimento deste projeto foram aplicados conceitos como:
 
-- Arquitetura Cliente-Servidor
-- APIs REST
-- DTOs
-- ModelMapper
-- Spring Data JPA
-- Regras de Negócio
-- Flyway
-- Docker
-- WebClient
-- JSF + PrimeFaces
-- Organização em camadas
+Arquitetura Cliente-Servidor
+APIs REST
+DTOs
+ModelMapper
+Spring Boot
+Spring Data JPA
+Hibernate
+Regras de negócio
+Flyway
+PostgreSQL
+Docker
+WebClient
+JSF
+PrimeFaces
+PhaseListener
+Sessão HTTP
+Integração com serviços externos
+Validação de dados
+Controle de vagas
+Git e GitHub
+GitHub Actions
 
 ⭐ Se este projeto foi útil para você, deixe uma estrela no repositório!
