@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import br.com.sistemaacademico.entity.Aluno;
 import br.com.sistemaacademico.entity.Matricula;
 import br.com.sistemaacademico.entity.Turma;
+import br.com.sistemaacademico.enun.StatusMatricula;
 
 public interface MatriculaRepository extends JpaRepository<Matricula, Long> {
 
@@ -37,4 +38,6 @@ public interface MatriculaRepository extends JpaRepository<Matricula, Long> {
 		       """)
 		List<Matricula> buscarUltimasMatriculas(Pageable pageable);
 
+	 long countByTurmaIdAndStatus(Long turmaId, StatusMatricula status);
+	
 }

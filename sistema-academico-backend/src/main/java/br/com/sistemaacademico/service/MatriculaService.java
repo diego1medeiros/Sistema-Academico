@@ -20,20 +20,24 @@ import br.com.sistemaacademico.repository.TurmaRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
-
 /**
  * Serviço responsável pelo gerenciamento das matrículas acadêmicas.
  *
- * <p>Implementa as principais regras de negócio relacionadas ao processo de
- * matrícula de alunos em turmas, incluindo cadastro, confirmação,
- * cancelamento, consultas e estatísticas.</p>
+ * <p>
+ * Implementa as principais regras de negócio relacionadas ao processo de
+ * matrícula de alunos em turmas, incluindo cadastro, confirmação, cancelamento,
+ * consultas e estatísticas.
+ * </p>
  *
- * <p>Regras implementadas:</p>
+ * <p>
+ * Regras implementadas:
+ * </p>
  * <ul>
- *     <li>Permite matrícula apenas em turmas abertas.</li>
- *     <li>Impede matrícula em turmas sem vagas disponíveis.</li>
- *     <li>Impede matrícula duplicada do mesmo aluno na mesma turma.</li>
- *     <li>Atualiza automaticamente o número de vagas ao confirmar ou cancelar uma matrícula.</li>
+ * <li>Permite matrícula apenas em turmas abertas.</li>
+ * <li>Impede matrícula em turmas sem vagas disponíveis.</li>
+ * <li>Impede matrícula duplicada do mesmo aluno na mesma turma.</li>
+ * <li>Atualiza automaticamente o número de vagas ao confirmar ou cancelar uma
+ * matrícula.</li>
  * </ul>
  *
  * @author Diego Medeiros Jesus
@@ -49,18 +53,20 @@ public class MatriculaService {
 	private final AlunoRepository alunoRepository;
 	private final TurmaRepository turmaRepository;
 
-	
-	
 	/**
 	 * Realiza o cadastro de uma nova matrícula para um aluno em uma turma.
 	 *
-	 * <p>A matrícula é criada inicialmente com o status {@code PENDENTE}.</p>
+	 * <p>
+	 * A matrícula é criada inicialmente com o status {@code PENDENTE}.
+	 * </p>
 	 *
-	 * <p>Antes da criação são verificadas as seguintes regras:</p>
+	 * <p>
+	 * Antes da criação são verificadas as seguintes regras:
+	 * </p>
 	 * <ul>
-	 *     <li>A turma deve estar aberta.</li>
-	 *     <li>A turma deve possuir vagas disponíveis.</li>
-	 *     <li>O aluno não pode estar matriculado na mesma turma.</li>
+	 * <li>A turma deve estar aberta.</li>
+	 * <li>A turma deve possuir vagas disponíveis.</li>
+	 * <li>O aluno não pode estar matriculado na mesma turma.</li>
 	 * </ul>
 	 *
 	 * @param alunoId identificador do aluno
@@ -74,7 +80,6 @@ public class MatriculaService {
 		Aluno aluno = alunoRepository.findById(alunoId).orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
 		Turma turma = turmaRepository.findById(turmaId).orElseThrow(() -> new RuntimeException("Turma não encontrada"));
 
-		
 		if (turma.getStatus() != StatusTurma.ABERTA) {
 			throw new RegraNegocioException("Turma não está aberta");
 		}
@@ -97,48 +102,54 @@ public class MatriculaService {
 
 	}
 
-	
 	/**
 	 * Confirma uma matrícula pendente.
 	 *
-	 * <p>Ao confirmar uma matrícula, uma vaga é consumida da turma e
-	 * o status passa para {@code CONFIRMADA}.</p>
+	 * <p>
+	 * Ao confirmar uma matrícula, uma vaga é consumida da turma e o status passa
+	 * para {@code CONFIRMADA}.
+	 * </p>
 	 *
 	 * @param id identificador da matrícula
 	 * @return matrícula confirmada
-	 * @throws RegraNegocioException caso a matrícula já esteja confirmada
-	 *                               ou a turma não possua vagas disponíveis
+	 * @throws RegraNegocioException caso a matrícula já esteja confirmada ou a
+	 *                               turma não possua vagas disponíveis
 	 */
+
+	@Transactional
 	public MatriculaResponseDTO confirmarMatricula(Long id) {
 
-		Matricula matricula = matriculaRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Matrícula não encontrada"));
+	    Matricula matricula = matriculaRepository.findById(id)
+	        .orElseThrow(() ->
+	            new RuntimeException("Matrícula não encontrada"));
 
-		if (matricula.getStatus() == StatusMatricula.CONFIRMADA) {
-			throw new RegraNegocioException("Matrícula já confirmada");
-		}
+	    if (matricula.getStatus() == StatusMatricula.CONFIRMADA) {
+	        throw new RegraNegocioException("Matrícula já confirmada");
+	    }
 
-		Turma turma = matricula.getTurma();
+	    Long turmaId = matricula.getTurma().getId();
 
-		if (turma.getVagasDisponiveis() <= 0) {
-			throw new RegraNegocioException("Sem vagas");
-		}
+	    int vagasConsumidas = turmaRepository.consumirVaga(turmaId);
 
-		turma.setVagasDisponiveis(turma.getVagasDisponiveis() - 1);
-		matricula.setStatus(StatusMatricula.CONFIRMADA);
+	    if (vagasConsumidas == 0) {
+	        throw new RegraNegocioException(
+	            "Sem vagas disponíveis"
+	        );
+	    }
 
-		turmaRepository.save(turma);
-		Matricula matriculaNova = matriculaRepository.save(matricula);
+	    matricula.setStatus(StatusMatricula.CONFIRMADA);
 
-		return converterParaDTO(matriculaNova);
+	    matriculaRepository.save(matricula);
 
+	    return converterParaDTO(matricula);
 	}
 
-	
 	/**
 	 * Cancela uma matrícula.
 	 *
-	 * <p>Caso a matrícula esteja confirmada, a vaga é devolvida para a turma.</p>
+	 * <p>
+	 * Caso a matrícula esteja confirmada, a vaga é devolvida para a turma.
+	 * </p>
 	 *
 	 * @param id identificador da matrícula
 	 * @return matrícula cancelada
@@ -168,7 +179,6 @@ public class MatriculaService {
 
 	}
 
-	
 	/**
 	 * Lista todas as matrículas de um aluno.
 	 *
@@ -180,7 +190,6 @@ public class MatriculaService {
 
 	}
 
-	
 	/**
 	 * Lista todas as matrículas de uma turma.
 	 *
@@ -192,31 +201,24 @@ public class MatriculaService {
 
 	}
 
-	
 	/**
-	 * Converte uma entidade  Matricula para seu DTO de resposta.
+	 * Converte uma entidade Matricula para seu DTO de resposta.
 	 *
 	 * @param matricula entidade de matrícula
 	 * @return DTO contendo as informações da matrícula
 	 */
 	private MatriculaResponseDTO converterParaDTO(Matricula matricula) {
 
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		return new MatriculaResponseDTO(
 
-				matricula.getId(),
-				matricula.getAluno().getId(),
-				matricula.getAluno().getNome(),
-				matricula.getTurma().getId(),
-				matricula.getTurma().getDisciplina().getNome(),
-				matricula.getTurma().getDisciplina().getCurso().getNome(),
-				matricula.getStatus(),
-				matricula.getDataMatricula().format(formatter)
-		);
+				matricula.getId(), matricula.getAluno().getId(), matricula.getAluno().getNome(),
+				matricula.getTurma().getId(), matricula.getTurma().getDisciplina().getNome(),
+				matricula.getTurma().getDisciplina().getCurso().getNome(), matricula.getStatus(),
+				matricula.getDataMatricula().format(formatter));
 
 	}
-	
-	
+
 	/**
 	 * Retorna todas as matrículas cadastradas.
 	 *
@@ -226,7 +228,6 @@ public class MatriculaService {
 		return matriculaRepository.findAll();
 	}
 
-	
 	/**
 	 * Retorna a quantidade total de matrículas cadastradas.
 	 *
@@ -236,24 +237,18 @@ public class MatriculaService {
 		return matriculaRepository.count();
 	}
 
-	
 	/**
 	 * Retorna as cinco matrículas mais recentes.
 	 *
-	 * <p>Utilizado principalmente pelo dashboard do sistema.</p>
+	 * <p>
+	 * Utilizado principalmente pelo dashboard do sistema.
+	 * </p>
 	 *
 	 * @return lista das cinco últimas matrículas realizadas
 	 */
-	public List<MatriculaResponseDTO> ultimasMatriculas(){
-		return matriculaRepository.buscarUltimas(
-		        PageRequest.of(0,5)
-		)
-		.stream()
-		.map(this::converterParaDTO)
-		.toList();
+	public List<MatriculaResponseDTO> ultimasMatriculas() {
+		return matriculaRepository.buscarUltimas(PageRequest.of(0, 5)).stream().map(this::converterParaDTO).toList();
 
-
-		}
-	
+	}
 
 }
