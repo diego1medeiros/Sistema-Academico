@@ -86,11 +86,11 @@ O projeto foi desenvolvido utilizando uma arquitetura **cliente-servidor**, com:
 
 Assista à demonstração completa do Sistema Acadêmico no YouTube:
 
-▶️ https://www.youtube.com/watch?v=deqnvNc9f2Q
+▶️ https://www.youtube.com/watch?v=nJgUWgklqdI
 
 Ou clique na imagem abaixo:
 
-[![Sistema Acadêmico](docs/imagens/dashboard.png)](https://www.youtube.com/watch?v=nJgUWgklqdI)
+[![Sistema Acadêmico](docs/imagens/dashboard5.png)](https://www.youtube.com/watch?v=nJgUWgklqdI)
 
 ---
 
