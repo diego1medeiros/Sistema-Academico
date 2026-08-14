@@ -94,17 +94,30 @@
 
 
     <build>
-        <plugins>
 
+    <resources>
 
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
+        <resource>
+            <directory>src/main/resources</directory>
+        </resource>
 
+        <resource>
+            <directory>src/main/webapp</directory>
+            <targetPath>META-INF/resources</targetPath>
+            <filtering>false</filtering>
+        </resource>
 
-        </plugins>
-    </build>
+    </resources>
 
+    <plugins>
+
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+
+    </plugins>
+
+</build>
 
 </project>

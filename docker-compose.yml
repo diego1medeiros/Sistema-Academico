@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
 
   postgres:
@@ -17,6 +15,12 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d matricula"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
 
   pgadmin:
     image: dpage/pgadmin4
@@ -30,9 +34,73 @@ services:
       - "8085:80"
 
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+
+
+  backend:
+    build:
+      context: ./sistema-academico-backend
+
+    container_name: sistema-academico-backend
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/matricula
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+
+  frontend:
+    build:
+      context: ./sistema-academico-frontend
+
+    container_name: sistema-academico-frontend
+
+    ports:
+      - "8081:8081"
+
+    environment:
+      BACKEND_URL: http://backend:8080
+
+    depends_on:
+      - backend
+
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: sistema-academico-prometheus
+
+    ports:
+      - "9090:9090"
+
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+    depends_on:
+      - backend
+
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: sistema-academico-grafana
+
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+    depends_on:
+      - prometheus
 
 
 volumes:
-
   postgres_data:
+  grafana_data:

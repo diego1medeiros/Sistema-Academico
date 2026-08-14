@@ -1,6 +1,5 @@
 package br.com.sistemaacademico.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.ClientRequest;
@@ -10,17 +9,13 @@ import org.springframework.web.reactive.function.client.WebClient;
 import jakarta.faces.context.FacesContext;
 
 @Configuration
-public class WebClientConfig {
-
-    @Value("${backend.url}")
-    private String backendUrl;
+public class WebClientAuthFilter {
 
     @Bean
-    WebClient webClient(WebClient.Builder builder) {
-        return builder
-                .baseUrl(backendUrl)
-                .filter(authFilter()) // <-- ADICIONE ISSO
-                .build();
+    public WebClient.Builder webClientBuilder() {
+
+        return WebClient.builder()
+                .filter(authFilter());
     }
 
     private ExchangeFilterFunction authFilter() {
@@ -38,7 +33,7 @@ public class WebClientConfig {
                     .getExternalContext()
                     .getSessionMap()
                     .get("TOKEN");
-            System.out.println("TOKEN = " + token);
+
             if (token == null) {
                 return next.exchange(request);
             }
@@ -50,10 +45,6 @@ public class WebClientConfig {
                                     "Bearer " + token
                             )
                             .build();
-
-            System.out.println(
-                    "JWT enviado para: " + request.url()
-            );
 
             return next.exchange(authenticatedRequest);
         };

@@ -36,7 +36,8 @@ public class UsuarioBean implements Serializable {
 	@Autowired
 	private UsuarioService service;
 	private List<UsuarioDto> listaUsuarios;
-
+	private String login;
+	private String senha;
 	private String filtro;
 
 	@PostConstruct
@@ -60,41 +61,96 @@ public class UsuarioBean implements Serializable {
 		return Arrays.asList(Perfil.getDescricaoPerfil());
 	}
 
-	public String isLoginSenhaValida(String login, String senha) {
+	public String login() {
 
 		try {
 
-			LoginRequestDTO loginRequestDTO = new LoginRequestDTO();
+			LoginRequestDTO request = new LoginRequestDTO();
 
-			loginRequestDTO.setLogin(login);
-			loginRequestDTO.setSenha(senha);
+			request.setLogin(login);
+			request.setSenha(senha);
 
-			LoginResponseDTO response = service.consultaUsuario(loginRequestDTO);
-
+			LoginResponseDTO response = service.login(request);
+			System.out.println("LOGIN - TOKEN SALVO = " + response.getToken());
+			System.out.println("LOGIN - PERFIL = " + response.getPerfil());
 			FacesContext context = FacesContext.getCurrentInstance();
 
+			// JWT
+			context.getExternalContext().getSessionMap().put("TOKEN", response.getToken());
+			
+
+			// Dados do usuário
 			context.getExternalContext().getSessionMap().put("NOME", response.getNome());
+
 			context.getExternalContext().getSessionMap().put("LOGIN", response.getLogin());
+
 			context.getExternalContext().getSessionMap().put("PERFIL", response.getPerfil());
+
 			context.getExternalContext().getSessionMap().put("funcionarioLogado", response);
+
 			MensagemUtils.info("Login realizado com sucesso!", null);
 
 			return "/pages/dashboard.xhtml?faces-redirect=true";
 
+		} catch (WebClientResponseException.Unauthorized e) {
+
+			MensagemUtils.erro("Login", "Usuário ou senha inválidos.");
+
+			return null;
+
 		} catch (WebClientResponseException.BadRequest e) {
 
-			// Login ou senha inválidos
 			MensagemUtils.erro("Login", "Usuário ou senha inválidos.");
 
 			return null;
 
 		} catch (Exception e) {
 
+			e.printStackTrace();
+
 			MensagemUtils.erro("Erro", "Não foi possível realizar o login.");
 
 			return null;
 		}
 	}
+
+	/*
+	 * public String isLoginSenhaValida(String login, String senha) {
+	 * 
+	 * try {
+	 * 
+	 * LoginRequestDTO loginRequestDTO = new LoginRequestDTO();
+	 * 
+	 * loginRequestDTO.setLogin(login); loginRequestDTO.setSenha(senha);
+	 * 
+	 * LoginResponseDTO response = service.consultaUsuario(loginRequestDTO);
+	 * 
+	 * FacesContext context = FacesContext.getCurrentInstance();
+	 * context.getExternalContext().getSessionMap().put("TOKEN",
+	 * response.getToken());
+	 * context.getExternalContext().getSessionMap().put("NOME", response.getNome());
+	 * context.getExternalContext().getSessionMap().put("LOGIN",
+	 * response.getLogin());
+	 * context.getExternalContext().getSessionMap().put("PERFIL",
+	 * response.getPerfil());
+	 * context.getExternalContext().getSessionMap().put("funcionarioLogado",
+	 * response); MensagemUtils.info("Login realizado com sucesso!", null);
+	 * 
+	 * return "/pages/dashboard.xhtml?faces-redirect=true";
+	 * 
+	 * } catch (WebClientResponseException.BadRequest e) {
+	 * 
+	 * // Login ou senha inválidos MensagemUtils.erro("Login",
+	 * "Usuário ou senha inválidos.");
+	 * 
+	 * return null;
+	 * 
+	 * } catch (Exception e) {
+	 * 
+	 * MensagemUtils.erro("Erro", "Não foi possível realizar o login.");
+	 * 
+	 * return null; } }
+	 */
 
 	public String getPerfil() {
 		return (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("PERFIL");
@@ -144,6 +200,11 @@ public class UsuarioBean implements Serializable {
 
 	public void novo() {
 		usuario = new UsuarioDto();
+	}
+
+	public String getToken() {
+
+		return (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("TOKEN");
 	}
 
 }

@@ -1,7 +1,5 @@
 package br.com.sistemaacademico.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
@@ -39,7 +37,7 @@ class MatriculaServiceConcorrenciaTest {
 
     @Autowired
     private TurmaRepository turmaRepository;
-    
+
     @Autowired
     private CursoRepository cursoRepository;
 
@@ -48,7 +46,7 @@ class MatriculaServiceConcorrenciaTest {
 
     @Autowired
     private AlunoRepository alunoRepository;
-    
+
     @Autowired
     private DisciplinaRepository disciplinaRepository;
 
@@ -56,67 +54,86 @@ class MatriculaServiceConcorrenciaTest {
     void devePermitirApenasUmaMatriculaQuandoDuasPessoasConfirmamAoMesmoTempo()
             throws Exception {
 
-        // ==========================
+        // =====================================================
         // ARRANGE
-        // ==========================
-    	Curso curso = new Curso();
-    	curso.setNome("Curso Teste");
+        // =====================================================
 
-    	curso = cursoRepository.saveAndFlush(curso);
+        // Curso
+        Curso curso = new Curso();
+        curso.setNome("Curso Teste");
 
-    	Disciplina disciplina = new Disciplina();
-    	disciplina.setNome("Disciplina Teste");
-    	disciplina.setCurso(curso);
+        curso = cursoRepository.saveAndFlush(curso);
 
-    	disciplina = disciplinaRepository.saveAndFlush(disciplina);
-    	
-    	Turma turma = new Turma();
+        // Disciplina
+        Disciplina disciplina = new Disciplina();
+        disciplina.setNome("Disciplina Teste");
+        disciplina.setCurso(curso);
 
-    	turma.setDisciplina(disciplina);
-    	turma.setVagas(1);
-    	turma.setVagasDisponiveis(1);
-    	turma.setStatus(StatusTurma.ABERTA);
-    	turma.setAtivo(true);
+        disciplina = disciplinaRepository.saveAndFlush(disciplina);
 
-    	turma = turmaRepository.saveAndFlush(turma); 
+        // Turma com apenas 1 vaga
+        Turma turma = new Turma();
+        turma.setDisciplina(disciplina);
+        turma.setVagas(1);
+        turma.setVagasDisponiveis(1);
+        turma.setStatus(StatusTurma.ABERTA);
+        turma.setAtivo(true);
 
-    	Aluno aluno1 = new Aluno();
-    	aluno1.setNome("Aluno 1");
-    	aluno1.setEmail("alu1@teste.com");
-    	aluno1.setCpf("11111191119");
-    	aluno1.setTelefone("21999999960");
-    	aluno1.getEndereco().setCep("20000000");
-    	aluno1.getEndereco().setRua("Rua Teste");
-    	aluno1.getEndereco().setNumero("100");
-    	aluno1.getEndereco().setBairro("Centro");
-    	aluno1.getEndereco().setCidade("Rio de Janeiro");
-    	aluno1.getEndereco().setEstado("RJ");
+        turma = turmaRepository.saveAndFlush(turma);
 
-    	aluno1 = alunoRepository.saveAndFlush(aluno1);
+        // =====================================================
+        // ALUNO 1
+        // =====================================================
 
-    	Aluno aluno2 = new Aluno();
-    	
-    	aluno2.setNome("Aluno 2");
-    	aluno2.setEmail("aluddddd2@teste.com");
-    	aluno2.setCpf("22292222229");
-    	aluno2.setTelefone("21999999958");
-    	aluno2.getEndereco().setCep("20000000");
-    	aluno2.getEndereco().setRua("Rua Teste");
-    	aluno2.getEndereco().setNumero("101");
-    	aluno2.getEndereco().setBairro("Centro");
-    	aluno2.getEndereco().setCidade("Rio de Janeiro");
-    	aluno2.getEndereco().setEstado("RJ");
+        Aluno aluno1 = new Aluno();
+        aluno1.setNome("Aluno 1");
+        aluno1.setEmail("aluno1@teste.com");
+        aluno1.setCpf("11111191119");
+        aluno1.setTelefone("21999999960");
 
-    	aluno2 = alunoRepository.saveAndFlush(aluno2);
+        aluno1.getEndereco().setCep("20000000");
+        aluno1.getEndereco().setRua("Rua Teste");
+        aluno1.getEndereco().setNumero("100");
+        aluno1.getEndereco().setBairro("Centro");
+        aluno1.getEndereco().setCidade("Rio de Janeiro");
+        aluno1.getEndereco().setEstado("RJ");
 
-    	Matricula matricula1 = new Matricula();
-    	matricula1.setAluno(aluno1);
-    	matricula1.setTurma(turma);
-    	matricula1.setStatus(StatusMatricula.PENDENTE);
-    	matricula1.setDataMatricula(LocalDateTime.now());
+        aluno1 = alunoRepository.saveAndFlush(aluno1);
 
+        // =====================================================
+        // ALUNO 2
+        // =====================================================
+
+        Aluno aluno2 = new Aluno();
+        aluno2.setNome("Aluno 2");
+        aluno2.setEmail("aluno2@teste.com");
+        aluno2.setCpf("22292222229");
+        aluno2.setTelefone("21999999958");
+
+        aluno2.getEndereco().setCep("20000000");
+        aluno2.getEndereco().setRua("Rua Teste");
+        aluno2.getEndereco().setNumero("101");
+        aluno2.getEndereco().setBairro("Centro");
+        aluno2.getEndereco().setCidade("Rio de Janeiro");
+        aluno2.getEndereco().setEstado("RJ");
+
+        aluno2 = alunoRepository.saveAndFlush(aluno2);
+
+        // =====================================================
+        // MATRÍCULA 1
+        // =====================================================
+
+        Matricula matricula1 = new Matricula();
+        matricula1.setAluno(aluno1);
+        matricula1.setTurma(turma);
+        matricula1.setStatus(StatusMatricula.PENDENTE);
+        matricula1.setDataMatricula(LocalDateTime.now());
 
         matricula1 = matriculaRepository.saveAndFlush(matricula1);
+
+        // =====================================================
+        // MATRÍCULA 2
+        // =====================================================
 
         Matricula matricula2 = new Matricula();
         matricula2.setAluno(aluno2);
@@ -126,19 +143,25 @@ class MatriculaServiceConcorrenciaTest {
 
         matricula2 = matriculaRepository.saveAndFlush(matricula2);
 
-        final Long matriculaId1 = matricula1.getId();
-        final Long matriculaId2 = matricula2.getId();
+        Long matriculaId1 = matricula1.getId();
+        Long matriculaId2 = matricula2.getId();
 
-        // ==========================
+        // =====================================================
         // CONCORRÊNCIA
-        // ==========================
+        // =====================================================
 
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
+        /*
+         * As duas threads ficam aguardando.
+         * Quando countDown() for chamado,
+         * as duas poderão iniciar praticamente ao mesmo tempo.
+         */
         CountDownLatch inicio = new CountDownLatch(1);
 
         CompletableFuture<Boolean> resultado1 =
                 CompletableFuture.supplyAsync(() -> {
+
                     try {
 
                         inicio.await();
@@ -154,22 +177,21 @@ class MatriculaServiceConcorrenciaTest {
                     } catch (RegraNegocioException e) {
 
                         System.out.println(
-                            "THREAD 1: REGRA -> " + e.getMessage()
+                                "THREAD 1: REGRA -> " + e.getMessage()
                         );
 
                         return false;
 
                     } catch (Exception e) {
 
-                        e.printStackTrace();
-
                         throw new RuntimeException(e);
                     }
-                }, executor);
 
+                }, executor);
 
         CompletableFuture<Boolean> resultado2 =
                 CompletableFuture.supplyAsync(() -> {
+
                     try {
 
                         inicio.await();
@@ -185,35 +207,62 @@ class MatriculaServiceConcorrenciaTest {
                     } catch (RegraNegocioException e) {
 
                         System.out.println(
-                            "THREAD 2: REGRA -> " + e.getMessage()
+                                "THREAD 2: REGRA -> " + e.getMessage()
                         );
 
                         return false;
 
                     } catch (Exception e) {
 
-                        e.printStackTrace();
-
                         throw new RuntimeException(e);
                     }
+
                 }, executor);
 
+        // =====================================================
+        // INICIA AS DUAS THREADS
+        // =====================================================
 
-        // Só agora libera as duas
+        System.out.println("======================================");
+        System.out.println("INICIANDO TESTE DE CONCORRÊNCIA");
+        System.out.println("VAGAS DISPONÍVEIS: 1");
+        System.out.println("DUAS MATRÍCULAS TENTANDO CONFIRMAR");
+        System.out.println("======================================");
+
         inicio.countDown();
 
+        // Aguarda as duas threads terminarem
         boolean confirmou1 = resultado1.join();
         boolean confirmou2 = resultado2.join();
 
-        System.out.println("RESULTADO THREAD 1 = " + confirmou1);
-        System.out.println("RESULTADO THREAD 2 = " + confirmou2);
+        // Encerra o executor
+        executor.shutdown();
 
+        // =====================================================
+        // RESULTADO
+        // =====================================================
+
+        System.out.println();
+        System.out.println("======================================");
+        System.out.println("RESULTADO DO TESTE");
+        System.out.println("THREAD 1 = " + confirmou1);
+        System.out.println("THREAD 2 = " + confirmou2);
+        System.out.println("======================================");
+
+        /*
+         * XOR (^):
+         *
+         * true  ^ false = true
+         * false ^ true  = true
+         * true  ^ true  = false
+         * false ^ false = false
+         *
+         * Portanto, exatamente uma matrícula
+         * precisa ser confirmada.
+         */
         assertTrue(
-            confirmou1 || confirmou2,
-            "Apenas uma matrícula deveria ser confirmada"
+                confirmou1 ^ confirmou2,
+                "Exatamente uma matrícula deve ser confirmada"
         );
-
-        assertFalse(
-            confirmou1 && confirmou2,
-            "Duas matrículas não podem ser confirmadas com apenas uma vaga"
-        );}}
+    }
+}

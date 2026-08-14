@@ -6,7 +6,6 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
-	<link rel="stylesheet" href="CSS/login.css" />
 	<h:outputStylesheet library="CSS" name="login.css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Sistema Academico</title>
@@ -29,13 +28,13 @@
 
 									<p:outputLabel value="Login" for="login"
 										style=" font-weight: bold;" />
-									<p:inputText value="#{login}" id="login"
+									<p:inputText value="#{usuarioBean.login}" id="login"
 										placeholder="digite o login" size="40" required="true"
 										requiredMessage="O login é obrigatoria" />
 
 									<p:outputLabel value="Senha" for="senha"
 										style=" font-weight: bold;" />
-									<p:password value="#{senha}" id="senha" toggleMask="true"
+									<p:password value="#{usuarioBean.senha}" id="senha" toggleMask="true"
 										required="true" placeholder="digite o senha" size="40"
 										requiredMessage="A senha e obrigatoria" />
 								</p:panelGrid>
@@ -43,7 +42,7 @@
 						</p:toolbar>
 						<br />
 						<p:commandButton
-							action="#{usuarioBean.isLoginSenhaValida(login,senha)}"
+							action="#{usuarioBean.login}"
 							value="Efetue Login" update="@form" process="@form"
 							style=" font-weight: bold;" styleClass="botao-login-inicial"
 							icon="pi pi-sign-in" />

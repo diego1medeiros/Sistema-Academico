@@ -16,11 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sistemaacademico.dto.AlunoDTO;
 import br.com.sistemaacademico.dto.LoginRequestDTO;
 import br.com.sistemaacademico.dto.LoginResponseDTO;
 import br.com.sistemaacademico.dto.UsuarioDto;
-import br.com.sistemaacademico.entity.Aluno;
 import br.com.sistemaacademico.entity.Usuario;
 import br.com.sistemaacademico.service.UsuarioService;
 import jakarta.validation.Valid;
@@ -47,6 +45,13 @@ public class UsuarioController {
 
 	}
 	
+	
+	
+	
+	@GetMapping("/teste-admin")
+	public String testeAdmin() {
+	    return "Você é ADMIN!";
+	}
 
 	@PostMapping("/cadastrar")
 	@ResponseStatus(HttpStatus.CREATED)
