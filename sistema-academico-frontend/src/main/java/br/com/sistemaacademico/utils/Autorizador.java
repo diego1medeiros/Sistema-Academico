@@ -21,12 +21,11 @@ public class Autorizador implements PhaseListener, Serializable {
 
         String paginaAtual = context.getViewRoot().getViewId();
 
-        System.out.println("===== AUTORIZADOR =====");
-        System.out.println("Página: " + paginaAtual);
+       
 
         // Permite acesso ao login
         if ("/pages/login.xhtml".equals(paginaAtual)) {
-            System.out.println("Página de login. Acesso permitido.");
+           
             return;
         }
 
@@ -35,7 +34,7 @@ public class Autorizador implements PhaseListener, Serializable {
                 .getSessionMap()
                 .get("funcionarioLogado");
 
-        System.out.println("Objeto na sessão: " + usuarioSessao);
+       
 
         // Verifica se existe usuário logado
         if (usuarioSessao instanceof LoginResponseDTO) {
@@ -43,15 +42,12 @@ public class Autorizador implements PhaseListener, Serializable {
             LoginResponseDTO usuario =
                     (LoginResponseDTO) usuarioSessao;
 
-            System.out.println("Usuário logado: " + usuario.getNome());
-            System.out.println("Login: " + usuario.getLogin());
-            System.out.println("Perfil: " + usuario.getPerfil());
+           
 
             return;
         }
 
-        System.out.println("NÃO existe usuário logado.");
-        System.out.println("Redirecionando para login.");
+        
 
         NavigationHandler handler =
                 context.getApplication().getNavigationHandler();

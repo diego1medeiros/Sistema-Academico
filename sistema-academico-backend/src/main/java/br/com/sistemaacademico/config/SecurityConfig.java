@@ -2,6 +2,7 @@ package br.com.sistemaacademico.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -34,48 +35,45 @@ public class SecurityConfig {
 
 				.authorizeHttpRequests(auth -> auth
 
-						.requestMatchers("/actuator", "/actuator/**").permitAll()
+					    .requestMatchers(
+					        "/swagger-ui/**",
+					        "/swagger-ui.html",
+					        "/v3/api-docs/**"
+					    ).permitAll()
 
-						.requestMatchers("/usuarios/cadastrar").permitAll()
-						// =========================
-						// LOGIN - PÚBLICO
-						// =========================
-						.requestMatchers("/usuarios").permitAll()
+					    .requestMatchers("/actuator", "/actuator/**").permitAll()
 
-						// =========================
-						// USUÁRIOS - ADMIN
-						// =========================
-						.requestMatchers("/usuarios/**").hasRole("ADMIN")
+					    // Login público
+					    .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
 
-						// =========================
-						// ALUNOS
-						// =========================
-						.requestMatchers("/alunos/**").hasAnyRole("ADMIN", "FUNCIONARIO")
+					    // Cadastro público
+					    .requestMatchers(HttpMethod.POST, "/usuarios/cadastrar").permitAll()
 
-						// =========================
-						// CURSOS
-						// =========================
-						.requestMatchers("/cursos/**").hasAnyRole("ADMIN", "FUNCIONARIO")
+					    // Usuários - somente ADMIN
+					    .requestMatchers("/usuarios/**").hasRole("ADMIN")
 
-						// =========================
-						// DISCIPLINAS
-						// =========================
-						.requestMatchers("/disciplinas/**").hasAnyRole("ADMIN", "FUNCIONARIO")
+					    // Alunos
+					    .requestMatchers("/alunos/**")
+					        .hasAnyRole("ADMIN", "FUNCIONARIO")
 
-						// =========================
-						// TURMAS
-						// =========================
-						.requestMatchers("/turmas/**").hasAnyRole("ADMIN", "FUNCIONARIO")
+					    // Cursos
+					    .requestMatchers("/cursos/**")
+					        .hasAnyRole("ADMIN", "FUNCIONARIO")
 
-						// =========================
-						// MATRÍCULAS
-						// =========================
-						.requestMatchers("/matriculas/**").hasAnyRole("ADMIN", "FUNCIONARIO")
+					    // Disciplinas
+					    .requestMatchers("/disciplinas/**")
+					        .hasAnyRole("ADMIN", "FUNCIONARIO")
 
-						// =========================
-						// DEMAIS APIs
-						// =========================
-						.anyRequest().authenticated())
+					    // Turmas
+					    .requestMatchers("/turmas/**")
+					        .hasAnyRole("ADMIN", "FUNCIONARIO")
+
+					    // Matrículas
+					    .requestMatchers("/matriculas/**")
+					        .hasAnyRole("ADMIN", "FUNCIONARIO")
+
+					    .anyRequest().authenticated()
+					)
 
 				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

@@ -71,21 +71,13 @@ public class UsuarioBean implements Serializable {
 			request.setSenha(senha);
 
 			LoginResponseDTO response = service.login(request);
-			System.out.println("LOGIN - TOKEN SALVO = " + response.getToken());
-			System.out.println("LOGIN - PERFIL = " + response.getPerfil());
+			
 			FacesContext context = FacesContext.getCurrentInstance();
 
-			// JWT
 			context.getExternalContext().getSessionMap().put("TOKEN", response.getToken());
-			
-
-			// Dados do usuário
 			context.getExternalContext().getSessionMap().put("NOME", response.getNome());
-
 			context.getExternalContext().getSessionMap().put("LOGIN", response.getLogin());
-
 			context.getExternalContext().getSessionMap().put("PERFIL", response.getPerfil());
-
 			context.getExternalContext().getSessionMap().put("funcionarioLogado", response);
 
 			MensagemUtils.info("Login realizado com sucesso!", null);

@@ -45,13 +45,6 @@ public class UsuarioController {
 
 	}
 	
-	
-	
-	
-	@GetMapping("/teste-admin")
-	public String testeAdmin() {
-	    return "Você é ADMIN!";
-	}
 
 	@PostMapping("/cadastrar")
 	@ResponseStatus(HttpStatus.CREATED)
